@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Invoice{% endblock title %}
+
+{% block body %}
+<section class="invoice py-5">
+    <div class="container invoice-container p-5">
+        <div class="text-center">
+            <h2>Order Invoice</h2>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-5">
+                <h5>From:</h5>
+                <p class="fw-bold text-success">Fruitica Fruit Stores Ltd.</p>
+                <p>Kohinoor World Towers, Opp Kohinoor World Towers, Opp Empire Estate, Old Mumbai - Pune Highway, Pimpri Colony, Pune, Maharashtra 411018</p>
+                <p>Email: fruitica@gmail.com</p>
+                <p>Phone: +91-9876543210</p>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <h5>To:</h5>
+                <p class="fw-bold text-primary">{{ order.checkoutAddress.first_name }} {{ order.checkoutAddress.last_name }}</p>
+                <p>{{ order.checkoutAddress.street1 }}</p>
+                <p>{{ order.checkoutAddress.city }}, {{ order.checkoutAddress.zip_code }}</p>
+                <p>Email: {{ order.checkoutAddress.email }}</p>
+                <p>Phone: {{ order.checkoutAddress.phone }}</p>
+            </div>
+        </div>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Weight</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.product.product_name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.productQuantity }}  {{item.unit_parameter}}</td>
+                    <td>Rs. {{ item.product.price }}</td>
+                    <td>Rs. {{ item.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        <div class="text-right">
+            <p>Subtotal: Rs. {{ subtotal }}</p>
+            <p>Tax ({{ tax_rate }}%): Rs. {{ tax }}</p>
+            <p><strong>Total: Rs. {{ total|floatformat:2 }}</strong></p>
+        </div>
+        <hr>
+        <p>Payment Instructions: In case of COD, Please check Packet is sealed properly then only accept and Pay the bill amount</p>
+        <p>Terms & Conditions apply</p>
+        <hr>
+        <div class="text-end">
+            <p>Thank you for your business!</p>
+        </div>
+        <div class="order-historybtn d-flex justify-content-center my-5">
+            <button onclick="window.location.href='{% url 'order_history' %}'" class="btn btn-primary" style="font-size: 1.8rem;">View Order History</button>
+        </div>
+    </div>
+    
+</section>
+
+<script>
+    setTimeout(function() {
+        var link = document.createElement('a');
+        link.href = "{% url 'download_invoice' order_id=order.id %}";
+        link.download = 'Invoice_{{ order.id }}.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }, 2000);
+</script>
+{% endblock body %}

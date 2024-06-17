@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container-fluid contact py-5">
+    <div class="container py-5">
+        <div class="p-5 bg-light rounded">
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="text-center mx-auto" style="max-width: 850px;">
+                        <h1 class="text-primary">Get in touch</h1>
+                        <p class="mb-4 text-dark">Welcome to our Contact Page! We're here to help and answer any
+                            questions you might have. Whether you're looking for more information about our services,
+                            need support, or just want to give us some feedback, feel free to reach out. You can contact
+                            us via email, phone, or by filling out the form below. We look forward to hearing from you!
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="h-100 rounded">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1589.568121498265!2d73.7987897869822!3d18.63474112107595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b92d986822d9%3A0x13b0437cbf911d4a!2sKohinoor%20World%20Towers!5e0!3m2!1sen!2sin!4v1716448683688!5m2!1sen!2sin"
+                            width="1220" height="300" style="border:1px solid #bab8b8; border-radius: 1rem;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="col-lg-3 col-md-6" style="width: 100%;">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3 text-dark" style="font-size: 3rem; font-weight: 700;">Connect us
+                            </h4>
+                            <form action="https://api.web3forms.com/submit" method="POST">
+                                <input type="hidden" name="access_key" value="5e619de3-d724-477b-b7f2-4dbb55016177"
+                                    style="color: black; border: 1px solid gray;">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label"></label>
+                                    <input type="text" placeholder="Enter Your Name" id="name" name="Name"
+                                        style="color: black; border: 1px solid gray;">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label"></label>
+                                    <input type="email" placeholder="Enter Your Email" id="email" name="Email"
+                                        style="color: black; border: 1px solid gray;">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label"></label>
+                                    <textarea name="message" id="message" rows="3" placeholder="Enter your Message Here"
+                                        style="color: black; border: 1px solid gray;"></textarea>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <button type="submit"
+                                        class="btn btn-primary rounded-3 py-1 px-3 bg-primary text-white"
+                                        style="">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="d-flex p-3 rounded bg-white">
+                        <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p class="mb-2 text-dark">Kohinoor World Towers, Opp Kohinoor World Towers, Opp Empire
+                                Estate, Old Mumbai - Pune Highway, Pimpri Colony, Pune, Maharashtra 411018</p>
+                        </div>
+                    </div>
+                    <div class="d-flex p-3 rounded bg-white">
+                        <i class="fas fa-envelope fa-2x text-primary me-4"></i>
+                        <div>
+                            <h4>Mail Us</h4>
+                            <p class="mb-2 text-dark">fruitica@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="d-flex p-3 rounded bg-white">
+                        <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
+                        <div>
+                            <h4>Telephone</h4>
+                            <p class="mb-2 text-dark">(+012) 3456 7890</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

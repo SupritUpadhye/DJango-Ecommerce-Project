@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Address Info{% endblock title %}
+{% block body %}
+<section class="user-profile-edit p-5">
+    <div class="container container-main light-style flex-grow-1 container-p-y p-4" style="background-color: var(--light-color);">
+        <p class="text-dark text-center p-4" style="font-size: 2rem; font-family: var(--secondary-font); font-weight: 700;">To facilitate seamless delivery services for your future orders, may we kindly request your address?</p>
+        <div class="container-fluid overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list"
+                            href="#account-info">Address Info</a>
+                    </div>
+                </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="account-info">
+    <form action="{% url 'address' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="card-body pb-2">
+                                <div class="form-group mt-5">
+                                    <label class="form-label">Address type</label>
+                                    <select class="custom-select w-100" style="font-size: 1.6rem;" name="address_type">
+                                        <option selected>Home</option>
+                                        <option>Office</option>
+                                        <option>Gardian</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label class="form-label">Street 1</label>
+                                    <input type="text" class="form-control rounded-2"
+                                        placeholder="Flat no/ Building no, Building Name/ Company Name" name="street1">
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label class="form-label">Street 2</label>
+                                    <input type="text" class="form-control rounded-2" placeholder="Street Address, Locality" name="street2">
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label class="form-label">City</label>
+                                    <select class="form-control" name="city">
+                                        <option value="" selected disabled>Select City</option>
+                                        <option value="Pune">Pune</option>
+                                        <option value="Mumbai">Mumbai</option>
+                                        <option value="Bangalore">Bangalore</option>
+                                        <option value="Hyderabad">Hyderabad</option>
+                                        <option value="Nashik">Nashik</option>
+                                        <option value="Chennai">Chennai</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Noida">Noida</option>
+                                        <option value="Kolkata">Kolkata</option>
+                                        <option value="Ahmedabad">Ahmedabad</option>
+                                        <option value="Surat">Surat</option>
+                                        <option value="Jaipur">Jaipur</option>
+                                        <option value="Lucknow">Lucknow</option>
+                                        <option value="Kanpur">Kanpur</option>
+                                        <option value="Nagpur">Nagpur</option>
+                                        <option value="Indore">Indore</option>
+                                        <option value="Thane">Thane</option>
+                                        <option value="Bhopal">Bhopal</option>
+                                        <option value="Visakhapatnam">Visakhapatnam</option>
+                                        <option value="Pimpri-Chinchwad">Pimpri-Chinchwad</option>
+                                        <option value="Patna">Patna</option>
+                                        <option value="Vadodara">Vadodara</option>
+                                        <option value="Ghaziabad">Ghaziabad</option>
+                                        <option value="Ludhiana">Ludhiana</option>
+                                        <option value="Agra">Agra</option>
+                                        <option value="Faridabad">Faridabad</option>
+                                        <option value="Meerut">Meerut</option>
+                                        <option value="Rajkot">Rajkot</option>
+                                        <option value="Kalyan-Dombivali">Kalyan-Dombivali</option>
+                                        <option value="Vasai-Virar">Vasai-Virar</option>
+                                    </select>
+                                </div>                                
+                                <div class="form-group mt-5">
+                                    <label class="form-label">Pincode</label>
+                                    <input type="number" class="form-control rounded-2" placeholder="Pincode" name="pincode">
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Contacts</h6>
+                                <div class="form-group mt-5">
+                                    <label class="form-label">Mobile No</label>
+                                    <input type="text" class="form-control rounded-2" placeholder="Enter Mobile Number" name="mobile_number">
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-end mt-3 me-5">
+            <button type="submit" class="btn btn-primary m-5">Save</button>&nbsp;
+            <a href="{% url 'skip_address' %}" class="btn btn-default my-5 mx-3">Skip For Now</a>
+        </div>
+    </form>
+    </div>
+</section>
+
+<script>
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "{{message}}",
+        footer: '<a href="{% url 'address' %}">Try Again</a>'
+    });
+    {% elif message.tags == 'success' %}
+    Swal.fire({
+        icon: "success",
+        title: "{{message}}",
+        showConfirmButton: false,
+        timer: 1500
+    });
+    {% endif %}
+    {% endfor %}
+</script>
+
+
+
+{% endblock body %}
+
+
+</html>

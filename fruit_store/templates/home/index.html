@@ -1,0 +1,436 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %} Online Fruit Store{% endblock title %}
+
+{% block login-btn %}Login{% endblock login-btn %}
+
+
+{% block body %}
+<!-- banner section start -->
+
+<section class="banner_section">
+    <div id="carouselExampleCaptions" class="carousel slide " data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <video class="video-slider" src="static/Media/videos/fruit-bg-2.mp4" muted autoplay loop></video>
+                <div class="carousel-caption col-md-6 col-10 col-offset-md-6">
+                    <h2>Nature's Bounty, Straight to Your Table</h2>
+                    <h1>Fresh <span style="color: orange;">&</span> <span>Organic</span></h1>
+                    <p>Savor the essence of pure, organic freshness with our handpicked selection of nature's
+                        treasures.</p>
+                    <a href="{% url 'store' %}" class="btn main-btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <video class="video-slider" src="static/Media/videos/bg-video-1.mp4" muted autoplay loop></video>
+                <div class="carousel-caption col-md-6 col-10 col-offset-md-6">
+                    <h2>From farm to table in a blink.</h2>
+                    <h1>Farm-Fresh <span> Delights </span></h1>
+                    <p>Embrace the freshness of the countryside with our swift farm-to-doorstep delivery, ensuring
+                        you savor the goodness of nature within the hour.</p>
+                    <a href="{% url 'store' %}" class="btn main-btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <video class="video-slider" src="static/Media/videos/fruit-salad-bg-3.mp4" muted autoplay loop></video>
+                <div class="carousel-caption col-md-6 col-10 col-offset-md-6">
+                    <h2>Savor Sweetness, Naturally</h2>
+                    <h1>Refreshing <span>Elixirs</span></h1>
+                    <p>Rejuvenate your senses with our invigorating fresh, organic fruit juices, and salads,
+                        alongside wholesome vegetable juices and salads, a refreshing escape to vitality and
+                        well-being.</p>
+                    <a href="{% url 'store' %}" class="btn main-btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <video class="video-slider" src="static/Media/videos/market-fruit-bg-4.mp4" muted autoplay
+                    loop></video>
+                <div class="carousel-caption col-md-6 col-10 col-offset-md-6">
+                    <h2>Handpicked Perfection, Every Time</h2>
+                    <h1>Exquisite <span>Quality</span></h1>
+                    <p>Each fruit undergoes meticulous quality checks, ensuring unrivaled freshness and flavor in
+                        every bite.</p>
+                    <a href="{% url 'store' %}" class="btn main-btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <video class="video-slider" src="static/Media/videos/seasonal-fruit-mango.mp4" muted autoplay
+                    loop></video>
+                <div class="carousel-caption col-md-6 col-10 col-offset-md-6">
+                    <h2>Nature's Ever-Changing Symphony</h2>
+                    <h1>Seasonal <span>Sensations</span></h1>
+                    <p>Immerse yourself in the delights of the season with our ever-evolving selection of seasonal
+                        fruits, each a testament to the bountiful beauty and flavors of nature.</p>
+                    <a href="{% url 'store' %}" class="btn main-btn">Shop Now</a>
+                </div>
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+    </div>
+</section>
+<!-- banner section end -->
+
+<!-- Feature Section start-->
+<section class="feature_section d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-lg-3 mb-5">
+                <div class="card features-box">
+                    <div class="text-center">
+                        <div class="features-icon-border">
+                            <div class="features-icon">
+                                <img src="static/Media/images/feature-icon/lemon.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="features-text">
+                            <h3>Direct from Farm</h3>
+                            <p>Farm-fresh, 100% organic fruits and veggies, delivered straight to your doorstep.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 mb-5">
+                <div class="card features-box">
+                    <div class="text-center">
+                        <div class="features-icon-border">
+                            <div class="features-icon">
+                                <img src="static/Media/images/feature-icon/truck-loaded.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="features-text">
+                            <h3>Free Shiping</h3>
+                            <p>Enjoy free shipping on all orders, because convenience should always come with
+                                savings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 mb-5">
+                <div class="card features-box">
+                    <div class="text-center">
+                        <div class="features-icon-border">
+                            <div class="features-icon">
+                                <img src="static/Media/images/feature-icon/wheat.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="features-text">
+                            <h3>Fresh and Healthy</h3>
+                            <p>Offering fresh, healthy food choices for vibrant living and sustained wellness.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 mb-5">
+                <div class="card features-box">
+                    <div class="text-center">
+                        <div class="features-icon-border">
+                            <div class="features-icon">
+                                <img src="static/Media/images/feature-icon/ui-chat.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="features-text">
+                            <h3>24/07 Support</h3>
+                            <p>Delivering round-the-clock services for your convenience, 24/7, whenever you need us
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Features Section end -->
+
+
+<!-- Featured Product Banner Start-->
+<section class="featured-product-section d-flex align-items-center">
+    <div class="container-fluid banner">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6 featured-product-txt">
+                    <div class="py-4 featured-txt-title">
+                        {% if banner_page %}
+                        <h1>{{ first_two_words }} <span>{{ remaining_words }}</span></h1>
+                        <p class="featured-txt-subtitle">{{ banner_page.subTitle }}</p>
+                        <p class="featured-txt-para">{{ banner_page.short_desc }}</p>
+                        {% endif %}
+                        <div class="buttons d-flex justify-content-between" style="margin-top: 2rem;">
+                            <a href="{% url 'buy_now' product_id=banner_product.id %}" class="btn main-btn">BUY Now</a>
+                            <a href="{% url 'store' %}" class="btn main-btn">More Products</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 product-img">
+                    <div class="position-relative">
+                        {% if banner_page and banner_page.bannerImg %}
+                        <a href="{% url 'product_detail' product_id=banner_product.id %}"><img src="{{ banner_page.bannerImg.url }}" class="img-fluid"
+                                alt="featured image"></a>
+                        {% endif %}
+                        {% if banner_product %}
+                        <div class="offer-price-circle">
+                            <h1><span class="offer-price-txt">{{ discount_percentage }}%</span> Off</h1>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Featured Product Banner End-->
+
+<!-- Best Selling Product section Start -->
+<section class="best_selling_product d-flex align-items-center">
+    <div class="container-fluid fruite py-5">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-4 text-center mb-5">
+                    <h2>Seasonal Dhamaka</h2>
+                </div>
+            </div>
+            <!-- best selling product section -->
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    {% for product in products %}
+                    {% if product.featured == True %}
+                    <div class="swiper-slide">
+                        {% include 'common-content.html' %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Best Selling Product section End -->
+
+<!-- Products Section Start -->
+<section class="landing_product_section" id="landing_product_section">
+    <div class="container-fluid fruite">
+        <div class="container py-5">
+            <div class="tab-class text-center">
+                <div class="row g-4">
+                    <div class="col-lg-5 text-center">
+                        <h2>Top Deals on Fruits and veggies</h2>
+                    </div>
+                    <!-- Navgation bar for filtering products start -->
+                    <div class="col-lg-7 text-end filter-nav">
+                        <ul class="nav nav-pills d-inline-flex text-center mb-5">
+                            <li class="nav-item">
+                                <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill"
+                                    href="#tab-1">
+                                    <span class="text-dark" style="width: 110px;">All Products</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
+                                    <span class="text-dark" style="width: 110px;">Vegetables</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
+                                    <span class="text-dark" style="width: 110px;">Fruits</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
+                                    <span class="text-dark" style="width: 110px;">Salads</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
+                                    <span class="text-dark" style="width: 110px;">Juices</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--  Navgation bar for filtering products End-->
+                </div>
+
+                <!-- Product Section -->
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="row g-4">
+                                    <!--product Card Section  implement backend here-->
+                                    {% for product in products %}
+                                    {% if product.get_percentage > 25 %}
+                                    <div class="col-md-6 col-lg-4 col-xl-3 col-sm-6">
+                                        {% include 'common-content.html' %}
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    <!-- products card end  -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter 1 Section Start -->
+                    <div id="tab-2" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="row g-4">
+                                    <!-- filter section product card start -->
+                                    {% for product in products %}
+                                    {% if product.get_percentage > 25 and product.category == "vegetables" %}
+                                    <div class="col-md-6 col-lg-4 col-xl-3 col-sm-6">
+                                        {% include 'common-content.html' %}
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    <!-- filter section product card end -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Filter 1 Section End -->
+
+                    <!-- Filter 2 Section Start -->
+
+                    <div id="tab-3" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="row g-4">
+                                    {% for product in products %}
+                                    {% if product.get_percentage > 25 and product.category == "fruits" %}
+                                    <!-- filter section product card start -->
+                                    <div class="col-md-6 col-lg-4 col-xl-3 col-sm-6">
+                                        {% include 'common-content.html' %}
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    <!-- filter section product card End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Filter 2 Section End -->
+
+                    <!-- Filter 3 Section Start -->
+                    <div id="tab-4" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="row g-4">
+                                    {% for product in products %}
+                                    {% if product.get_percentage > 25 %}
+                                    {% if product.category == "Fruit Salad" or product.category == "Vegetable Salad" %}
+                                    <!-- filter section product card start -->
+                                    <div class="col-md-6 col-lg-4 col-xl-3 col-sm-6">
+                                        {% include 'common-content.html' %}
+                                    </div>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    <!-- filter section product card End -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Filter 3 Section End -->
+
+                    <!-- Filter 4 Section End -->
+                    <div id="tab-5" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="row g-4">
+                                    {% for product in products %}
+                                    {% if product.get_percentage > 25 %}
+                                    {% if product.category == "Fruit Juice" or product.category == "Vegetable juice" %}
+                                    <!-- filter section product card start -->
+                                    <div class="col-md-6 col-lg-4 col-xl-3 col-sm-6">
+                                        {% include 'common-content.html' %}
+                                    </div>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    <!-- filter section product card End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Filter 4 Section End -->
+                </div>
+            </div>
+        </div>
+        <div class="more-products d-flex justify-content-center align-items-center">
+            <a href="{% url 'store' %}" class="btn main-btn" style="padding: 0.2rem 1.5rem;">Discover More</a>
+        </div>
+    </div>
+    </div>
+
+
+</section>
+<!--  Products Landing page  Section End -->
+
+<!-- Customer review/ testomonial Section Start -->
+<section class="customer-review d-flex align-items-center mb-5">
+    <div class="container">
+        <div class="swiper mySwiper2">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Our Customers saying...!</h2>
+                </div>
+            </div>
+            <div class="swiper-wrapper">
+                {% for review in product_reviews %}
+                {% if review.rating >= 4 %}
+                <div class="swiper-slide">
+                    <div class="testimonial-slider d-flex align-items-center">
+                        <div class="cust-container">
+                            {% if review.user.profile_img %}
+                            <div class="profile-img d-flex align-items-center justify-content-center py-2">
+                                <img src="{{ review.user.profile_img.url }}" alt="profile image">
+                            </div>
+                            {% endif %}
+                            <div class="customer">
+                                <div class="review">
+                                    <div
+                                        class="review-txt overflow-auto d-flex text-center align-items-center justify-content-center">
+                                        <p>{{review.review}}</p>
+                                    </div>
+                                    <div class="start-review d-flex justify-content-center align-items-center py-3">
+                                        <i class="fa-solid fa-star" style="{% if review and review.rating >= 1 %} color: #60cd12; {% else %} color: gray; {% endif %}"></i>
+                                        <i class="fa-solid fa-star" style="{% if review and review.rating >= 2 %} color: #60cd12; {% else %} color: gray; {% endif %}"></i>
+                                        <i class="fa-solid fa-star" style="{% if review and review.rating >= 3 %} color: #60cd12; {% else %} color: gray; {% endif %}"></i>
+                                        <i class="fa-solid fa-star" style="{% if review and review.rating >= 4 %} color: #60cd12; {% else %} color: gray; {% endif %}"></i>
+                                        <i class="fa-solid fa-star" style="{% if review and review.rating >= 5 %} color: #60cd12; {% else %} color: gray; {% endif %}"></i>
+                                    </div>
+                                    <div class="name text-center">
+                                        <h2 class="p-0 m-0">{{ review.user.get_full_name }}</h2>
+                                        <p class="m-0 py-3">{{review.date}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</section>
+<!-- Customer review/ Testomonial Section End -->
+
+
+{% endblock body %}

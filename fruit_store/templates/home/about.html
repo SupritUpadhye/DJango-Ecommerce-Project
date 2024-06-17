@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+        <!-- About Section Start -->
+        <section class="landing_about_section p-5">
+            <div class="container mt-5 pt-5">
+                <div class="row align-items-center column-gap-5 p-2">
+                    <div class="col-xl-6 col-lg-6">
+                        <h1 style="color: var(--dark-color); font-size:5rem;">Who we are?</h1>
+                            <h3>Welcome to Fruitica, your ultimate destination for all things fresh and fruity!</h3>
+                            <div class="about-details">
+                                <p class="txt-bold">At Fruitica, we're all about bringing the goodness of farm-fresh fruits
+                                    and
+                                    veggies right to your doorstep.</p>
+                                <p>Our mission is simple: to provide convenient delivery services for fresh fruits,
+                                    vegetables,
+                                    and related items, such as fruit salads, fruit juices, vegetable salads, and vegetable
+                                    juices.</p>
+                                <p>Our commitment to quality is unwavering. We work closely with our trusted farmers and
+                                    vendors
+                                    to ensure that every item we deliver is of the highest quality, straight from the farm
+                                    to
+                                    your table.</p>
+                                <p>Join us on our journey as we continue to grow and expand, one satisfied customer at a
+                                    time.
+                                </p>
+                                <h5 class="text-center m-5">Welcome to the <span>Fruitica family !</span></h3>
+                            </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-5 col-sm-8 ">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                                    aria-label="Slide 4"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                                    aria-label="Slide 5"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="{% static 'Media/images/about/fruitica-truck.jpeg' %}" class="d-block w-100"
+                                        alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{% static 'Media/images/about/Fruitica-deleviry-img.jpeg' %}" class="d-block w-100"
+                                        alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{% static 'Media/images/about/Fruitica-deleviry-boy.jpeg' %}" class="d-block w-100"
+                                        alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{% static 'Media/images/about/fruit-salad img.jpeg' %}" class="d-block w-100"
+                                        alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{% static 'Media/images/about/fruit-juice.jpeg' %}" class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!-- About Section end -->
+{% endblock body %}
+    

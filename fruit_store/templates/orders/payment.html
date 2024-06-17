@@ -1,0 +1,31 @@
+{% extends 'cart_base.html' %}
+
+{% block body %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<form id="razorpay-form" method="post" action="{{ callback_url }}">
+    {% csrf_token %}
+    <input type="hidden" name="razorpay_order_id" value="{{ order_id }}">
+    <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+    <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+</form>
+<script>
+    var options = {
+        "key": "{{ razorpay_key }}",
+        "amount": "{{ amount }}",
+        "currency": "INR",
+        "name": "Fruitica - Online Fruit Store",
+        "description": "Test Transaction",
+        "order_id": "{{ order_id }}",
+        "handler": function (response){
+            document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+            document.getElementById('razorpay_signature').value = response.razorpay_signature;
+            document.getElementById('razorpay-form').submit();
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+</script>
+{% endblock body %}

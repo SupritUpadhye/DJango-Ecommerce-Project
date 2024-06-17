@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Order History{% endblock title %}
+
+{% block body %}
+<section class="orders py-5">
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <h2>Order History</h2>
+            {% if order_data %}
+            <div class="table-responsive">
+                <table class="table mt-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Date and Time</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Download Invoice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order_data in order_data %}
+                        {% for item in order_data.items %}
+                        <tr>
+                            {% if forloop.first %}
+                            <td rowspan="{{ order_data.rowspan }}">{{ order_data.order.order_id }}</td>
+                            <td rowspan="{{ order_data.rowspan }}">{{ order_data.order.created_at }}</td>
+                            {% endif %}
+                            <td>
+                                <img src="{{ item.product.image.url }}" class="img-fluid me-2 rounded-circle" style="width: 50px; height: 50px;" alt="">
+                                {{ item.product.product_name }}
+                            </td>
+                            <td>{{ item.quantity }}</td>
+                            <td>Rs. {{ item.price }}</td>
+                            <td>Rs. {{ item.total_price }}</td>
+                            {% if forloop.first %}
+                            <td rowspan="{{ order_data.rowspan }}">{{ order_data.order.order_status }}</td>
+                            {% endif %}
+                            <td>
+                                <div class="text-center" style="font-size: 2.5rem;"><a href="{% url 'download_invoice' order_id=order_data.order.id %}"><i class="fa-solid fa-download"></i></a></div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="5" class="text-end"><strong>Overall Total Price</strong></td>
+                            <td><strong>Rs. {{ order_data.total_order_price|floatformat:2 }}</strong></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="d-flex align-items-center justify-content-center">
+                <h2 class="text-dark">"Oops... Looks like you haven't ordered yet!"</h2>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <img class="img-fluid" src="{% static 'media/images/order-empty.png' %}" alt="">
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock body %}

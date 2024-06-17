@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Payment Status{% endblock title %}
+
+{% block body %}
+
+<script>
+    Swal.fire({
+        title: "Order Placed...we'll be in touch shortly!",
+        icon: "success",
+        showClass: {
+            popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+        `
+        },
+        hideClass: {
+            popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+        `
+        }
+    });
+    setTimeout(function() {
+        window.location.href = "{% url 'invoice' order_id=order.id %}";
+    }, 3000);
+</script>
+
+{% endblock body %}

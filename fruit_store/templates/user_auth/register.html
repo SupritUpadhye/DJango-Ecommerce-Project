@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Sign up form{% endblock title %}
+{% block login-btn %}Login{% endblock login-btn %}
+
+
+{% block body %}
+{% load socialaccount %}
+<section class="registration-page d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="row cont rounded-4">
+            <h2>Sign Up</h2>
+            <div class="col-12 container-form">
+                <form action="/authentication/signup/" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="mb-3 input-group">
+                                <input class="rounded-4" type="text" id="first-name" name="first_name" required>
+                                <label for="first-name" class="form-label">
+                                    <i class="fa-solid fa-user pe-2"></i>
+                                    First Name
+                                </label>
+                                <div class="form-valid d-flex justify-content-center align-items-center bg-danger">
+                                    <i class="fa-solid fa-circle-exclamation position-absolute"></i>
+                                    <i class="fa-regular fa-circle-check position-absolute"></i>
+                                    <span id="first-name-error">errormsg</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="mb-3 input-group">
+                                <input class="rounded-4" type="text" id="last-name" name="last_name" required>
+                                <label for="last-name" class="form-label">
+                                    <i class="fa-solid fa-user pe-2"></i>
+                                    Last Name
+                                </label>
+                                <div class="form-valid d-flex justify-content-center align-items-center bg-danger">
+                                    <i class="fa-solid fa-circle-exclamation position-absolute"></i>
+                                    <i class="fa-regular fa-circle-check position-absolute"></i>
+                                    <span id="last-name-error">errormsg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="mb-3 input-group">
+                                <input class="rounded-4" type="email" id="email" name="email" required >
+                                <label for="email" class="form-label">
+                                    <i class="fa-solid fa-envelope pe-2"></i>
+                                    Email
+                                </label>
+                                <div class="form-valid d-flex justify-content-center align-items-center bg-danger">
+                                    <i class="fa-solid fa-circle-exclamation position-absolute"></i>
+                                    <i class="fa-regular fa-circle-check position-absolute"></i>
+                                    <span id="email-error">errormsg</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="mb-3 input-group">
+                                <input class="rounded-4" type="number" id="mob-no" name="mobNo" required >
+                                <label for="mob-no" class="form-label">
+                                    <i class="fa-solid fa-phone pe-2"></i>
+                                    Mobile No
+                                </label>
+                                <div class="form-valid d-flex justify-content-center align-items-center bg-danger">
+                                    <i class="fa-solid fa-circle-exclamation position-absolute"></i>
+                                    <i class="fa-regular fa-circle-check position-absolute"></i>
+                                    <span id="mob-no-error">errormsg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-4 input-group">
+                                <input class="rounded-4" type="password" id="password" name="password"  required>
+                                <label for="password" class="form-label">
+                                    <i class="fa-solid fa-lock pe-2"></i>
+                                    Password
+                                </label>
+                                <div class="form-valid d-flex w-100 justify-content-center align-items-center">
+                                    <i class="fa-solid fa-circle-exclamation position-absolute"></i>
+                                    <i class="fa-regular fa-circle-check position-absolute"></i>
+                                    <span id="password-error">errormsg</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                <input class="rounded-4" type="password" id="Cpassword" name="Cpassword" required>
+                                <label for="Cpassword" class="form-label">
+                                    <i class="fa-solid fa-key pe-2"></i>
+                                    Confirm Password
+                                </label>
+                                <div class="form-valid d-flex justify-content-center align-items-center bg-danger">
+                                    <i class="fa-solid fa-circle-exclamation position-absolute"></i>
+                                    <i class="fa-regular fa-circle-check position-absolute"></i>
+                                    <span id="Cpassword-error">errormsg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="submit-btn">
+                            <div class="col-lg-5 col-md-5 col-sm-5 justify-content-center align-items-center">
+                                <button type="submit"
+                                    class="btn main-btn p-3 rounded-pill d-flex align-items-center justify-content-center"
+                                    style="width: 100%; font-size: 1.4rem;">Sign up</button>
+                            </div>
+                            <div class="col-lg-1 col-md-2 col-sm-2 d-flex justify-content-center align-items-center">
+                                <p class="text-center text-dark">OR</p>
+                            </div>
+                            <div class="col-lg-6 col-md-5 col-sm-5 d-flex justify-content-center align-items-center">
+                                <a href="{% provider_login_url 'google' %}?next=/" class="btn main-btn p-3 d-flex align-items-center justify-content-center"
+                                style="width: 100%; font-size: 1.4rem;">
+                                    <img class="px-3" src="{% static 'Media/images/feature-icon/google-icon.png' %}" alt="login google" height="20rem">
+                                    Login With Google
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="login-link text-center py-2 m-4">
+                        <a href="{% url 'login' %}" class="text-center">Already Registered? Login here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="{% static 'Javascript/registration.js' %}"></script>
+
+<script>
+    
+    {% for message in messages %}
+    {% if message.tags == 'error' or message.tags == 'warning' %}
+    Swal.fire({
+        icon: "{{message.tags}}",
+        title: "Oops...{{message.tags}}",
+        text: "{{message}}",
+        footer: '<a href="{% url 'signup' %}">Try Again</a>'
+    });
+    {% endif %}
+    {% endfor %}
+
+</script>
+{% endblock body %}
+    

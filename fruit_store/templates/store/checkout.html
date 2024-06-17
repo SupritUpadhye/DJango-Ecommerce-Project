@@ -1,0 +1,208 @@
+<!-- templates/store/checkout.html -->
+
+{% extends 'cart_base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock title %}
+
+{% block body %}
+<section class="bg-light py-5">
+    <div class="container">
+        <form method="POST">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 mb-4">
+                <!-- Checkout -->
+                <div class="card shadow-0 border">
+                    <div class="p-4">
+                        <h5 class="card-title mb-3">Order checkout</h5>
+                        
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">First name</p>
+                                    <div class="form-outline">
+                                        <input type="text" name="first_name" value="{{ user.first_name }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Last name</p>
+                                    <div class="form-outline">
+                                        <input type="text" name="last_name" value="{{ user.last_name }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Phone</p>
+                                    <div class="form-outline">
+                                        <input type="text" name="phone" value="{{ user.mobNo }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Email</p>
+                                    <div class="form-outline">
+                                        <input type="email" name="email" value="{{ user.email }}" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4" />
+
+                            <h5 class="card-title mb-3">Shipping info</h5>
+
+                            <div class="row">
+                                <div class="col-sm-8 mb-3">
+                                    <p class="mb-0">Street-1</p>
+                                    <div class="form-outline">
+                                        <input type="text" name="street1" value="{{ address.street1 }}" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 mb-3">
+                                    <p class="mb-0">City</p>
+                                    <div class="form-outline">
+                                        <input type="text" name="city" value="{{ address.city }}" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8 mb-3">
+                                    <p class="mb-0">Street-2</p>
+                                    <div class="form-outline">
+                                        <input type="text" name="street2" value="{{ address.street2 }}" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-6 mb-3">
+                                    <p class="mb-0">Zip Code</p>
+                                    <div class="form-outline">
+                                        <input type="text" name="zip_code" value="{{ address.pincode }}" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <p class="mb-0">Additional Message</p>
+                                    <div class="form-outline">
+                                        <textarea name="message" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4">
+                <div class="card mb-4" style="overflow: auto; max-height: 450px;">
+                    <div class="card-body">
+                        <h5 class="mb-3">Order Summary</h5>
+                        {% for item in cart_items %}
+                        {% if is_buy_now %}
+                        <div class="row py-2 border-bottom">
+                            <div class="col-3">
+                                <img src="{{ item.product.image.url }}" style="height: 96px; width: 96px;" class="img-sm rounded-4 border" />
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-between align-items-center ms-4">
+                                    <a href="#" class="nav-link fw-bold p-0 text">{{ item.product.product_name }}</a>
+                                </div>
+                                <div class="ms-4">
+                                    <text class="h6" id="total-{{ item.id }}">Rs. {{ total_amount }} /-</text> <br />
+                                    <small class="text-muted text-nowrap"> Rs. {{ item.product.price }} / per {{ unit_parameter }} </small>
+                                </div>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <form method="post" action="{% url 'decrease_quantity' item.id %}">
+                                    {% csrf_token %}
+                                    <button class="btn btn-outline-secondary" {% if item.quantity <= 1 %} disabled{% endif %}>-</button>
+                                </form>
+                                <span class="mx-2" id="quantity-{{ item.id }}">{{ item.quantity }}</span>
+                                <form id="increase-form-{{ item.id }}" method="post" action="{% url 'increase_quantity' item.id %}">
+                                    {% csrf_token %}
+                                    <button class="btn btn-outline-secondary" onclick="increaseQuantity('{{ item.id }}', '{{ item.product.stock }}')">+</button>
+                                </form> 
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="row py-2 border-bottom">
+                            <div class="col-3">
+                                <img src="{{ item.product.image.url }}" style="height: 96px; width: 96px;" class="img-sm rounded-4 border" />
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-between align-items-center ms-4">
+                                    <a href="#" class="nav-link fw-bold p-0 text">{{ item.product.product_name }}</a>
+                                </div>
+                                <div class="ms-4">
+                                    <text class="h6" id="total-{{ item.id }}">Rs. {{ item.total_price }} /-</text> <br />
+                                    <small class="text-muted text-nowrap"> Rs. {{ item.product.price }} / per {{ item.unit_parameter }} </small>
+                                </div>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <p class="p-1 border bg-info bg-gradient rounded-3">Qty. - {{ item.quantity }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card shadow-0 border">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Total MRP :</p>
+                            <p class="mb-2" id="total-price">Rs. {{ total_mrp|floatformat:"2" }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Discount :</p>
+                            <p class="mb-2 text-success">-Rs. {{ total_discount|floatformat:"2" }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">TAX (12% GST):</p>
+                            <p class="mb-2">Rs. {{ tax_amount|floatformat:"2" }}</p>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Total Price (incl. tax):</p>
+                            <p class="mb-2 fw-bold" id="final-total">Rs. {{ total_price_with_tax|floatformat:"2" }}</p>
+                        </div>
+                        <div class="mt-3">
+                            <button id="rzp-button" type="submit" class="btn btn-success w-100 border-light mt-2">Pay With Razorpay</button>
+                            <form action="{% url 'checkout' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="payment_mode" value="cod">
+                                <button type="submit" class="btn btn-primary w-100 border-light mt-2">Cash on Delivery</button>
+                            </form>
+                        </div>
+                        <div class="mt-3">
+                            <a href="{% url 'store' %}" class="text-center mt-2 nav-link link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"> Back to Shop </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    var options = {
+        "key": "rzp_test_zsghZMWlkKoLnR", // Enter the Key ID generated from the Dashboard
+        "amount": "{{ total_price_with_tax|floatformat:"2" }}00",
+        "currency": "INR",
+        "name": "Online Sweet Shop",
+        "description": "Purchase Product",
+        "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response) {
+            console.log("success")
+            var form = document.getElementById("myform");
+            var custId = document.querySelector('input[name="custid"]:checked').value;
+            var redirectUrl = 'http://localhost:8000/paymentdone?order_id=' + response.razorpay_order_id + '&payment_id=' + response.razorpay_payment_id + '&cust_id=' + custId;
+            window.location.href = redirectUrl;
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response) {
+        alert(response.error.description);
+        });
+        document.getElementById('rzp-button').onclick = function (e) {
+            rzp1.open();
+            e.preventDefault(); // Prevent the default form submission behavior
+        }
+</script>
+{% endblock body %}

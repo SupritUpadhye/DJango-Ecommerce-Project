@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Fruitica - {% block title %}{% endblock title %}</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="shortcut icon" href="{% static 'Media/favicon_io/android-chrome-512x512.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <!-- Jumbotron -->
+        <div class="p-2 text-center bg-dark">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 d-flex align-items-center py-0 my-0">
+                        <div class="p-0 m-0">
+                            <a class="brand-logo p-0 m-0" href="/">
+                                <img src="{% static 'Media/images/logo.png' %}" class="img-fluid p-0 ms-4" alt="FtoC logo" style="width: 170px;">
+                                <p id="logo-txt">Fruit Store</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 d-flex align-items-center">
+                        <nav class="d-flex">
+                            <h6 class="mb-0">
+                                <a href="/" class="text-white-50">Home</a>
+                                <span class="text-white-50 mx-2"> > </span>
+                                <a href="{% url 'cart_detail' %}"  class="{% if request.path == cart_detail_url %}text-white{% else %}text-white-50{% endif %}">2. Shopping cart</a>
+                                <span class="text-white-50 mx-2"> > </span>
+                                <a href="{% url 'checkout' %}" class="{% if request.path == checkout_url %}text-white{% else %}text-white-50{% endif %}">3. Checkout</a>
+                                <span class="text-white-50 mx-2"> > </span>
+                                <a href="#" class="text-white-50">4. Payment</a>
+                            </h6>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    
+    {% block body %}
+        
+    {% endblock body %}
+        
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="container-fluid footer bg-dark text-white-50 pt-3 d-flex align-items-center">
+            <div class="container pb-3">
+                <div class="pb-4 mb-4" style="border-bottom: 1px solid #60cd1278 ;">
+                    <div class="row g-4">
+                        <div class="col-lg-9 d-flex align-items-center justify-content-center align-items-center">
+                            <a class="brand-logo p-0 m-0" href="/">
+                                <img src="static/Media/images/logo.png" alt="FtoC logo" style="width: 200px;">
+                                <p id="logo-txt">Fruit Store</p>
+                            </a>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="social-icons d-flex justify-content-center align-items-center pt-5">
+                                <a class="btn mx-2 rounded-circle" href="https://wa.me/918975156788">
+                                    <i class="fa-brands fa-whatsapp fa-lg"></i>
+                                </a>
+                                <a class="btn mx-2 rounded-circle" href="https://www.facebook.com/">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="btn mx-2 rounded-circle" href="https://x.com/?lang=en">
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                                <a class="btn mx-2 rounded-circle"
+                                    href="https://www.linkedin.com/in/suprit-upadhye-b666432b0/">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Why People Like us!</h4>
+                            <p class="mb-4 text-light">typesetting, remaining essentially unchanged. It was
+                                popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
+                            <a href="about.html" class="btn main-btn py-1 px-4 rounded-pill">Read More</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 px-5">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Shop Info</h4>
+                            <a class="btn-link" href="{% url 'about' %}">About Us</a>
+                            <a class="btn-link" href="{% url 'contact_us' %}">Contact Us</a>
+                            <a class="btn-link" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                            <a class="btn-link" href="{% url 'privacy_policy' %}">Terms & Condition</a>
+                            <a class="btn-link" href="{% url 'privacy_policy' %}">Return Policy</a>
+                            <a class="btn-link" href="{% url 'privacy_policy' %}">FAQs & Help</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        {% if request.user.is_authenticated %}
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Account</h4>
+                            <a class="btn-link" href="{% url 'profileEdit' user.id %}">My Account</a>
+                            <a class="btn-link" href="orders.html">Shop details</a>
+                            <a class="btn-link" href="cart.html">Shopping Cart</a>
+                            <a class="btn-link" href="wishlist.html">Wishlist</a>
+                            <a class="btn-link" href="order_history.html">Order History</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light">Contact</h4>
+                            <p class="text-ligh2">Email: Example@gmail.com</p>
+                            <p class="m-0 text-light">Phone: +91- 9876543210</p>
+                            <form action="https://api.web3forms.com/submit" method="POST">
+                                <input type="hidden" name="access_key" value="5e619de3-d724-477b-b7f2-4dbb55016177">
+                                <div class="mb-2">
+                                    <label for="name" class="form-label"></label>
+                                    <input type="text" placeholder="Enter Your Name" id="name" name="Name">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="email" class="form-label"></label>
+                                    <input type="email" placeholder="Enter Your Email" id="email" name="Email">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="message" class="form-label"></label>
+                                    <textarea name="message" id="message" rows="3"
+                                        placeholder="Enter your Message Here"></textarea>
+                                </div>
+                                <div class="button d-flex justify-content-center align-items-center">
+                                    <button type="submit" class="main-btn py-1 px-3 rounded-pill">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer -->
+    <!-- MDB -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="js/script.js"></script>
+
+    
+</body>
+
+</html>

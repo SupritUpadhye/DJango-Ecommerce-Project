@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Online Fruit Store - Products{% endblock title %}
+
+{% block body %}
+<section class="store">
+    <div class="container-fluid fruite">
+        <div class="container py-2">
+            <div class="row g-4">
+                <div class="col-lg-12">
+                    <div class="row g-4">
+                        <div class="col-xl-3">
+                            <form id="searchform" method="get" action="{% url 'store' %}">
+                                <div class="input-group w-100 mx-auto d-flex">
+                                    <input type="search" class="form-control p-3" name="search" placeholder="keywords" aria-describedby="search-icon-1" value="{{ search_query }}" autocomplete="off">
+                                    <span id="search-icon-1" class="input-group-text p-3" onclick="document.getElementById('searchform').submit();"><i class="fa fa-search"></i></span>
+                                </div>
+                                <input type="hidden" name="sort" value="{{ sort_by }}">
+                            </form>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="display: none; font-size: 1.6rem; font-weight: 600; font-family: var(--secondary-font);"></div>
+                        </div>
+
+                            <div class="col-5"></div>
+
+                        <div class="col-xl-4">
+                            <div class="border ps-3 py-2 rounded-3 d-flex justify-content-between align-items-center mb-4 prd-sort">
+                                <label for="sort">Sort by:</label>
+                                <select id="sort" name="sort" class="border-0 form-select-sm bg-light me-3" onchange="document.getElementById('sortform').submit();">
+                                    <option value="default" {% if request.GET.sort == 'default' %}selected{% endif %}>Default</option>
+                                    <option value="price_low_to_high" {% if request.GET.sort == 'price_low_to_high' %}selected{% endif %}>Price - Low to High</option>
+                                    <option value="price_high_to_low" {% if request.GET.sort == 'price_high_to_low' %}selected{% endif %}>Price - High to Low</option>
+                                    <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Latest uploads</option>
+                                    <option value="expiry_date" {% if request.GET.sort == 'expiry_date' %}selected{% endif %}>Date of Expiry</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-12">
+                            <div class="tab-class text-center">
+                                <div class="row g-4">
+                                    <!-- Navigation bar for filtering products start -->
+                                    <div class="col-lg-3 text-end filter-nav">
+                                        <ul class="nav nav-pills d-block text-start">
+                                            <li class="nav-item">
+                                                <a class="d-flex mt-4 py-2 ps-4 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
+                                                    <span class="text-dark" style="width: 100%;">All Products</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="d-flex py-2 mt-4 ps-5 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
+                                                    <span class="text-dark" style="width: 100%;">Vegetables</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="d-flex mt-4 py-2 ps-5 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
+                                                    <span class="text-dark" style="width: 100%;">Fruits</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="d-flex mt-4 py-2 ps-5 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
+                                                    <span class="text-dark" style="width: 100%;">Fruit Salads</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="d-flex mt-4 py-2 ps-5 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
+                                                    <span class="text-dark" style="width: 100%;">Fruit Juices</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="d-flex mt-4 py-2 ps-5 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-6">
+                                                    <span class="text-dark" style="width: 100%;">Vegetable Salads</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="d-flex mt-4 py-2 ps-5 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-7">
+                                                    <span class="text-dark" style="width: 100%;">Vegetable Juices</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="d-flex mt-4 py-2 ps-5 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-8">
+                                                    <span class="text-dark" style="width: 100%;">Others</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="col-lg-12 border rounded-4 px-4 mt-5">
+                                            <h4 class="my-4 text-secondary text-center">Featured products</h4>
+                                            {% for product in products %}
+                                            {% if product.featured %}
+                                            <a href="{% url 'product_detail' product.id %}">
+                                                <div class="row g-5 border-bottom d-flex align-items-center">
+                                                    <div class="col-5 py-3">
+                                                        <div class="d-flex align-items-center" style="width: 100px; height: 100px;">
+                                                            <img src="{{product.image.url}}" class="img-fluid rounded-4" alt="Image">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <div>
+                                                            <h5 class="mb-2 text-start">{{product.product_name}}</h5>
+                                                            <div class="d-flex mb-2">
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between">
+                                                                <h5 class="fw-bold me-2">Rs.{{product.price}}</h5>
+                                                                <h5 class="text-danger text-decoration-line-through" style="font-size: 1.3rem;">Rs.{{product.max_retail_price}}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <!-- Navigation bar for filtering products End -->
+                                    <div class="col-lg-9 pb-4">
+                                        <div class="tab-content">
+                                            <div id="tab-1" class="tab-pane fade show p-0 active">
+                                                <div class="row g-4">
+                                                    <div class="col-lg-12">
+                                                        <div class="row g-4">
+                                                            {% for product in products %}
+                                                            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-6 px-4">
+                                                                {% include 'common-content.html' %}
+                                                            </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pt-5 d-flex justify-content-center align-items-center">
+                                                    <nav aria-label="Page navigation">
+                                                        <ul class="pagination">
+                                                            {% if products.has_previous %}
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="?{% if sort_by %}sort={{ sort_by }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}page=1" tabindex="-1" style="font-size: 1.6rem;  font-weight: 500;">First</a>
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="page-item disabled">
+                                                                    <a class="page-link" tabindex="-1" style="font-size: 1.6rem; font-weight: 500;">First</a>
+                                                                </li>
+                                                            {% endif %}
+                                                            
+                                                            {% for i in products.paginator.page_range %}
+                                                                {% if products.number == i %}
+                                                                    <li class="page-item active"><a class="page-link" style="font-size: 1.6rem; font-weight: 500;">{{ i }}</a></li>
+                                                                {% else %}
+                                                                    <li class="page-item"><a class="page-link" href="?{% if sort_by %}sort={{ sort_by }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}page={{ i }}" style="font-size: 1.6rem; font-weight: 500;">{{ i }}</a></li>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            
+                                                            {% if products.has_next %}
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="?{% if sort_by %}sort={{ sort_by }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}page={{ products.next_page_number }}" style="font-size: 1.6rem; font-weight: 500;">Next</a>
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="page-item disabled">
+                                                                    <a class="page-link" style="font-size: 1.6rem; font-weight: 500;">Next</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                            <div id="tab-2" class="tab-pane fade show p-0">
+                                                <div class="row g-4">
+                                                    <div class="col-lg-12">
+                                                        <div class="row g-4">
+                                                            {% for product in all_products %}
+                                                            {% if product.category == "vegetables" %}
+                                                            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-6 px-4">
+                                                                {% include 'common-content.html' %}
+                                                            </div>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tab-3" class="tab-pane fade show p-0">
+                                                <div class="row g-4">
+                                                    <div class="col-lg-12">
+                                                        <div class="row g-4">
+                                                            {% for product in all_products %}
+                                                            {% if product.category == "fruits" %}
+                                                            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-6 px-4">
+                                                                {% include 'common-content.html' %}
+                                                            </div>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tab-4" class="tab-pane fade show p-0">
+                                                <div class="row g-4">
+                                                    <div class="col-lg-12">
+                                                        <div class="row g-4">
+                                                            {% for product in all_products %}
+                                                            {% if product.category == "Fruit Salad" %}
+                                                            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-6 px-4">
+                                                                {% include 'common-content.html' %}
+                                                            </div>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tab-5" class="tab-pane fade show p-0">
+                                                <div class="row g-4">
+                                                    <div class="col-lg-12">
+                                                        <div class="row g-4">
+                                                            {% for product in all_products %}
+                                                            {% if product.category == "Fruit Juice" %}
+                                                            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-6 px-4">
+                                                                {% include 'common-content.html' %}
+                                                            </div>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tab-6" class="tab-pane fade show p-0">
+                                                <div class="row g-4">
+                                                    <div class="col-lg-12">
+                                                        <div class="row g-4">
+                                                            {% for product in all_products %}
+                                                            {% if product.category == "Vegetable Salad" %}
+                                                            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-6 px-4">
+                                                                {% include 'common-content.html' %}
+                                                            </div>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tab-7" class="tab-pane fade show p-0">
+                                                <div class="row g-4">
+                                                    <div class="col-lg-12">
+                                                        <div class="row g-4">
+                                                            {% for product in all_products %}
+                                                            {% if product.category == "Vegetable juice" %}
+                                                            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-6 px-4">
+                                                                {% include 'common-content.html' %}
+                                                            </div>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tab-8" class="tab-pane fade show p-0">
+                                                <div class="row g-4">
+                                                    <div class="col-lg-12">
+                                                        <div class="row g-4">
+                                                            {% for product in all_products %}
+                                                            {% if product.category == "other" %}
+                                                            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-6 px-4">
+                                                                {% include 'common-content.html' %}
+                                                            </div>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<form id="sortform" method="get" action="{% url 'store' %}" style="display: none;">
+    <input type="hidden" name="sort" id="sortinput" value="{{ request.GET.sort }}">
+    <input type="hidden" name="search" value="{{ search_query }}">
+</form>
+
+<script>
+    document.getElementById('sort').addEventListener('change', function() {
+        document.getElementById('sortinput').value = this.value;
+        document.getElementById('sortform').submit();
+    });
+
+const searchInput = document.querySelector('input[name="search"]');
+const suggestionsContainer = document.querySelector('.dropdown-menu');
+
+searchInput.addEventListener('input', function() {
+    const searchQuery = searchInput.value.trim();
+
+    if (searchQuery.length === 0) {
+        suggestionsContainer.style.display = 'none';
+        return;
+    }
+
+    fetch(`/api/suggestions/?q=${searchQuery}`)
+        .then(response => response.json())
+        .then(data => {
+            suggestionsContainer.innerHTML = '';
+            if (data.length > 0) {
+                data.forEach(suggestion => {
+                    const suggestionElement = document.createElement('a');
+                    suggestionElement.textContent = suggestion.name;
+                     suggestionElement.href = '#'; // Set the href attribute accordingly
+                    suggestionElement.classList.add('dropdown-item');
+                    suggestionElement.addEventListener('click', function() {
+                        searchInput.value = suggestion.name;
+                        suggestionsContainer.style.display = 'none';
+                         // Optionally, you can submit the form here
+                    });
+                    suggestionsContainer.appendChild(suggestionElement);
+                });
+                suggestionsContainer.style.display = 'block';
+            } else {
+                suggestionsContainer.style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching suggestions:', error);
+            suggestionsContainer.style.display = 'none';
+        });
+});
+</script>
+{% endblock body %}

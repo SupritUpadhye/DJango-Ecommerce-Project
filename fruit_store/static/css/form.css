@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Sedan+SC&display=swap');
+
+
+:root {
+    /* background color */
+    --bg-white: #fff;
+
+    /* text colors */
+    --primeary-text: #061738;
+    --secondary-color: rgb(96, 205, 18);
+    --orange-color: #ffa500;
+    --yellow-color: #ffff00;
+    --light-color: #e2f6de;
+    --dark-color: #03262c;
+    --text-white: #fff;
+    --text-gray: #c3bebe;
+    --anchor-color: #007aff;
+
+    /* font Family */
+    --primary-font: "Barlow Condensed", sans-serif;
+    --secondary-font: "Roboto", sans-serif;
+    --special-font: "Lato", sans-serif;
+    --discount-font: "Merriweather", serif;
+    --footer-font: "Sedan SC", serif;
+}
+
+.registration-page {
+    background: url(static/Media/images/form_bg2.png);
+    background-position: center;
+    background-size: cover;
+    padding: 10rem 0;
+}
+
+.registration-page .container h2 {
+    font-family: var(--secondary-font);
+    text-transform: uppercase;
+    color: var(--primeary-text);
+    font-size: 3rem;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.registration-page .container .cont {
+    height: 80%;
+    background-color: var(--light-color);
+    box-shadow: 5px 5px 40px black;
+    padding: 3rem;
+}
+
+.registration-page .container-form .input-group {
+    background: transparent;
+    position: relative;
+    padding-bottom: 4rem;
+}
+
+.registration-page .input-group input {
+    width: 100%;
+    padding: 1rem;
+    outline: none;
+    border: 1px solid var(--text-gray);
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--primeary-text);
+    transition: 0.3s;
+    background: transparent;
+}
+
+.registration-page .input-group label{
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    padding: 1.2rem 2rem;
+    transition: 0.3s;
+    color: #061738bb;
+}
+.registration-page .input-group input:hover,
+.registration-page .input-group input:focus,
+.input-group input:valid {
+    border-bottom: 2px solid var(--orange-color);
+}
+
+
+.registration-page .submit-btn{
+    display: flex;
+}
+
+/* google img */
+.registration-page button img{
+    margin: 0 1rem;   
+}
+
+.registration-page .container-form form {
+    font-size: 1.4rem;
+    font-family: var(--secondary-font);
+    font-weight: 500;
+}
+.registration-page .login-link a{
+    color: var(--primary-color);
+}
+.registration-page .login-link a:hover{
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Form validation css */
+.registration-page .input-group.success input{
+    border-bottom:2px solid var(--secondary-color);
+}
+.registration-page .input-group.error input{
+    border-bottom:2px solid #ff3838;
+}
+.registration-page .input-group .form-valid span{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    font-family: var(--primary-font);
+    font-size: 1.2rem;
+    left: 0;
+    top: 5rem;
+    color: #ff3838;
+    visibility: hidden;
+}
+.registration-page .input-group.error .form-valid span{
+    visibility: visible;
+}
+.registration-page .input-group .form-valid i{
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    visibility: hidden;
+}
+
+.registration-page .input-group.error .form-valid .fa-circle-exclamation{
+    color: #ff3838;
+    visibility: visible;
+}
+.registration-page .input-group.success .form-valid .fa-circle-check{
+    color: var(--secondary-color);
+    visibility: visible;
+}
+
+
+/* footer css specifically for login and signup form */
+.footer{
+    border-radius:0;
+    min-height: 80vh;
+}
+
+@media(max-width: 575px){
+    .registration-page .submit-btn{
+        display: block;
+    }
+}

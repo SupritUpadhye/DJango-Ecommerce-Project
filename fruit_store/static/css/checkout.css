@@ -1,0 +1,180 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Sedan+SC&display=swap');
+
+#logo-txt{
+    color: var(--text-white);
+    font-size: 0.8rem;
+    font-family: var(--footer-font);
+    letter-spacing: 4px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    margin-top: -0.2rem;
+}
+:root {
+    /* background color */
+    --bg-white: #fff;
+
+    /* text colors */
+    --primeary-text: #061738;
+    --secondary-color: rgb(96, 205, 18);
+    --orange-color: #ffa500;
+    --yellow-color: #ffff00;
+    --light-color: #e2f6de;
+    --dark-color: #03262c;
+    --text-white: #fff;
+    --text-gray: #c3bebe;
+    --anchor-color: #007aff;
+
+    /* font Family */
+    --primary-font: "Barlow Condensed", sans-serif;
+    --secondary-font: "Roboto", sans-serif;
+    --special-font: "Lato", sans-serif;
+    --discount-font: "Merriweather", serif;
+    --footer-font: "Sedan SC", serif;
+}
+
+
+a{
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+/* Footer  Section*/
+.footer {
+    min-height: 60vh;
+    box-shadow: 0 -0.5rem 1.3rem 0 #0000009a;
+}
+
+
+.footer .social-icons i {
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.footer .social-icons .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    width: 2.3rem;
+    height: 2.3rem;
+    font-size: 1rem;
+    border: 2px solid var(--text-gray);
+}
+
+.footer .social-icons .btn:hover {
+    background: var(--text-gray);
+}
+
+.footer .social-icons .btn:hover i {
+    color: var(--primeary-text);
+    transition: 0.5s;
+}
+
+.footer-item h4 {
+    font-family: var(--footer-font);
+    font-weight: 400;
+}
+
+.footer-item p {
+    font-family: var(--secondary-font);
+    text-align: justify;
+    font-size: 1rem;
+}
+
+.footer-item form input,
+textarea {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: 1px solid var(--text-gray);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--text-white);
+    font-size: 0.7rem;
+    font-family: var(--secondary-font);
+    /* transition: 0.3s; */
+}
+
+.footer-item form input:focus,
+.footer-item form textarea:focus {
+    border: 1px solid var(--secondary-color);
+}
+
+.footer-item form input:active,
+textarea:active {
+    border: 1px solid var(--secondary-color);
+}
+
+.footer-item form input::placeholder,
+.footer-item form textarea::placeholder {
+    font-size: 0.8rem;
+    font-family: var(--secondary-font);
+    color: var(--text-gray);
+}
+
+.footer-item form button,
+.footer-item .main-btn {
+    font-size: 0.9rem;
+    background: transparent;
+    border: 1px solid orange;
+    color: var(--text-gray);
+    font-weight: 400;
+    font-family: var(--secondary-font);
+    transition: 0.5s;
+    text-transform: uppercase;
+}
+
+.footer-item form button:hover,
+.footer-item .main-btn:hover {
+    color: var(--orange-color);
+    border: 1px solid var(--text-gray);
+    background: transparent;
+}
+
+.footer-item a {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    font-family: var(--secondary-font);
+    text-decoration: none;
+    line-height: 35px;
+    transition: 0.5s;
+}
+
+.footer-item a:hover {
+    color: var(--orange-color);
+    transform: translateY(-0.2rem);
+}
+
+
+
+.cart-details .icon-hover-primary:hover {
+    border-color: #3b71ca !important;
+    background-color: white !important;
+}
+
+.cart-details .icon-hover-primary:hover i {
+    color: #3b71ca !important;
+}
+
+.cart-details .icon-hover-danger:hover {
+    border-color: #dc4c64 !important;
+    background-color: white !important;
+}
+
+.cart-details .icon-hover-danger:hover i {
+    color: #dc4c64 !important;
+}
+
+
+/* -------------------------------------------------------------Cart Css---------------------------------------------------------------------------- */

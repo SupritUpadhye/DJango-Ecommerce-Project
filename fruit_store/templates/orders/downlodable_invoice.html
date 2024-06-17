@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .invoice-container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        .invoice-header, .invoice-footer {
+            margin-bottom: 20px;
+        }
+
+        .invoice-header table, .invoice-footer table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .invoice-header td, .invoice-footer td {
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        .invoice-company {
+            text-align: left;
+        }
+
+        .invoice-date {
+            text-align: right;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        p{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <table style="border: none;">
+            <tr>
+                <td style="width: 40%;"><h3>FRUITICA ENTERPRISES PVT LTD.</h3></td>
+                <td style="width: 45%; font-size: 2rem; text-align: center;"><h1>Invoice</h1></td>
+                <td style="width: 45%"><div style="padding-left: 100px;"><img src="static/media/images/logo.png" alt="" width="150px"></div></td>
+            </tr>
+        </table>
+        <div class="invoice-header">
+            <table>
+                <tr>
+                    <td class="invoice-from">
+                        <small>From</small>
+                        <br>
+                            <strong>Fruitica Enterprises Pvt Ltd.</strong><br>
+                            Kohinoor World Towers, Opp Kohinoor World Towers, Opp Empire Estate, Old Mumbai - Pune
+                            Highway, Pimpri Colony, Pune, Maharashtra 411018<br>
+                            City, Zip Code<br>
+                            <br>
+                            Phone: +91-9876543210<br>
+                            Email: fruitica@gmail.com
+                    </td>
+                    <td class="invoice-to">
+                        <small>To</small>
+                        <br>
+                            <strong>{{ order.checkoutAddress.first_name }} {{ order.checkoutAddress.last_name }}</strong><br>
+                            {{ order.checkoutAddress.street1 }},<br>
+                            {{ order.checkoutAddress.street2 }},<br>
+                            {{ order.checkoutAddress.city }}, {{ order.checkoutAddress.zip_code }} <br> <br>
+                            Email: {{ order.checkoutAddress.email }} <br>
+                            Phone: {{ order.checkoutAddress.phone }} <br>
+                    </td>
+                    <td class="invoice-date">
+                        <strong>Order ID</strong><br>
+                        <span style="font-size: 1.2rem;">{{ order.order_id }}</span>
+                        <br><br>
+                        <strong>Invoice Date and Time</strong><br>
+                        <span style="font-size: 1.2rem;">{{ order.created_at }}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>DESCRIPTION</th>
+                    <th>Quantity</th>
+                    <th>Weight</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.product.product_name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.productQuantity }}  {{item.unit_parameter}}</td>
+                    <td>Rs. {{ item.product.price }}</td>
+                    <td>Rs. {{ item.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="invoice-price">
+            <tr>
+                <td>
+                    <strong>SUBTOTAL :</strong><br>
+                    Rs. {{ subtotal }}
+                </td>
+                <td colspan="2" style="text-align: start;">
+                    <strong>Taxation ({{ tax_rate }}% as per Government rules and regulations):</strong><br>
+                    Rs. {{ tax }}
+                </td>
+                <td style="text-align: start;">
+                    <strong>TOTAL: </strong><br><br>
+                    <span style="font-size: 1.8rem; font-weight: 700;">Rs. {{ total }}</span>
+                </td>
+            </tr>
+        </table>
+        <table style="border: none;">
+            <tr style="border: none;">
+                <td><p><span style="color: #e63550; font-weight: 600;">Payment Instructions:</span> In case of COD, Please check Packet is sealed properly then only accept and Pay the bill amount</p></td>
+            </tr>
+            <tr style="border: none;">
+                <td><p>Terms & Conditions apply</p></td>
+            </tr>
+        </table>
+        <div class="invoice-footer" style="border: none;">
+            <p style="text-align: center; font-size: 16px;">
+                THANK YOU FOR YOUR BUSINESS
+            </p>
+            <p style="text-align: center;">
+                <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> fruitica@gmail.com</span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

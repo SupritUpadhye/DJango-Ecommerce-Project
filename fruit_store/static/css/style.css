@@ -1,0 +1,1472 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Sedan+SC&display=swap');
+
+/* Common CSS */
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    outline: none;
+}
+
+/*** Spinner Start ***/
+
+
+/*** Spinner End ***/
+
+/* =============================================================================================================================================================================== */
+
+/* Root colors and fonts */
+:root {
+    /* background color */
+    --bg-white: #fff;
+
+    /* text colors */
+    --primeary-text: #061738;
+    --secondary-color: rgb(96, 205, 18);
+    --orange-color: #ffa500;
+    --yellow-color: #ffff00;
+    --light-color: #e2f6de;
+    --dark-color: #03262c;
+    --text-white: #fff;
+    --text-gray: #c3bebe;
+    --anchor-color: #007aff;
+
+    /* font Family */
+    --primary-font: "Barlow Condensed", sans-serif;
+    --secondary-font: "Roboto", sans-serif;
+    --special-font: "Lato", sans-serif;
+    --discount-font: "Merriweather", serif;
+    --footer-font: "Sedan SC", serif;
+}
+
+body,
+html {
+    color: var(--primeary-text);
+    font-size: 10px;
+    font-weight: 400;
+    font-family: var(--primary-font);
+    scroll-behavior: smooth;
+    line-height: 1.5;
+}
+
+.alert {
+    transition: opacity 0.5s ease-out;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+/* Heading and Paragraph CSS */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+h1 {
+    font-size: 8rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+h1 span {
+    color: var(--secondary-color);
+}
+
+h2 {
+    font-size: 4.5rem;
+    font-weight: 600;
+    display: inline-block;
+    text-transform: capitalize;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    color: var(--orange-color);
+}
+
+h3 {
+    font-size: 3.1rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+h4 {
+    font-size: 2.5rem;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--primeary-text);
+}
+
+h5 {
+    font-size: 1.8rem;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--primeary-text);
+}
+
+p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    font-family: var(--secondary-font);
+    color: var(--text-white);
+}
+
+/* iframe img css */
+embed,
+iframe,
+img,
+object {
+    max-width: 100%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Anchor tags CSS */
+a,
+a:active,
+a:focus,
+a:hover,
+button {
+    text-decoration: none;
+    outline: 0;
+}
+
+li a {
+    color: var(--text-white);
+}
+
+a:hover,
+button:hover {
+    -webkit-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+/* ================================================================================================================================================================= */
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, #60cd12);
+    border: 1px solid transparent;
+    background-clip: content-box;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(transparent, #ffa500);
+}
+
+
+.main-btn {
+    position: relative;
+    color: var(--bg-white);
+    background: var(--secondary-color);
+    z-index: 1;
+    overflow: hidden;
+    border: 0.2rem solid var(--bg-white);
+    border-radius: 3.5rem;
+    text-transform: uppercase;
+    padding: 1rem 3.5rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+    letter-spacing: 0.2rem;
+}
+
+.main-btn:hover {
+    background: var(--bg-white);
+    color: var(--secondary-color);
+    border: 0.2rem solid var(--secondary-color);
+}
+
+.show-more-details-btn {
+    background-color: var(--orange-color);
+    color: var(--primeary-text);
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-family: var(--secondary-font);
+    padding: 0.5rem 0;
+}
+
+.show-more-details-btn:hover {
+    background-color: var(--bg-white);
+    color: var(--primeary-text);
+    border: 1px solid var(--orange-color);
+}
+
+/* ================================================================================================================================================================= */
+/* Sections CSS */
+section {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.section-title {
+    font-size: 4rem;
+    font-weight: 600;
+    color: var(--primeary-text);
+    text-transform: capitalize;
+    margin-bottom: 2rem;
+
+}
+
+.section-subtitle {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--primeary-text);
+    font-family: var(--secondary-font);
+    max-width: 40%;
+    margin: auto;
+    margin-bottom: 1.5rem;
+
+}
+
+.about .banner_section,
+.product .banner_section,
+.gallery .banner_section,
+.contactt .banner_section {
+    background: url(static/Media/images/banner-slide/all-fruit-main-slide.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 17rem;
+    padding-bottom: 10rem;
+    min-height: auto;
+}
+
+/* ================================================================================================================================================================= */
+/* Navbar CSS */
+.header {
+    position: absolute;
+    width: 100%;
+    top: 2rem;
+    left: 0;
+    z-index: 9999;
+}
+
+.header .navbar {
+    background-color: #00000068;
+    padding: 0.6rem 5rem;
+    border-radius: 10px;
+}
+
+/* fixed navbar css */
+.header .navbar.scroll-on {
+    position: fixed;
+    top: -0.4rem;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 0;
+    margin: auto;
+    z-index: 999;
+    background-color: #000000e8;
+    box-shadow: 0 0.8rem 1.3rem 0 #0000009a;
+    transition: all 0.15s ease-in-out 0s;
+}
+
+
+/* header navbar logo image css */
+.header .brand-logo {
+    width: 18rem;
+    margin-top: -0.1rem;
+}
+
+#logo-txt {
+    color: var(--text-white);
+    font-size: 1.2rem;
+    font-family: var(--footer-font);
+    letter-spacing: 5px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    margin-top: -0.2rem;
+}
+
+/* header navbar links */
+.header .navbar-nav .nav-link {
+    color: var(--text-white);
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
+    letter-spacing: 3px;
+    font-family: var(--primary-font);
+}
+
+.header .navbar-nav .nav-link:hover,
+.header .navbar-nav .nav-link.active {
+    color: var(--secondary-color);
+}
+
+/* navbar profile, cart and search icon css */
+.header .navbar .nav-icons a {
+    font-size: 1.6rem;
+    color: var(--secondary-color);
+    margin: 0 1rem;
+}
+
+.header .navbar .nav-icons a i {
+    transition: 0.3s ease-in;
+}
+
+.header .navbar .nav-icons a i:hover {
+    color: var(--text-white);
+}
+
+.header .navbar .nav-icons .cart-count {
+    top: -5px;
+    left: 15px;
+    height: 20px;
+    min-width: 20px;
+    background-color: var(--orange-color);
+    color: black;
+    font-weight: 600;
+}
+
+.header .navbar .nav-icons .btn {
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    margin: 0 1rem;
+    background-color: transparent;
+    font-size: 1.6rem;
+    padding: 1rem;
+}
+
+.header .navbar .nav-icons .btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.header .navbar .nav-icons .btn i {
+    color: var(--text-white);
+}
+
+/* Search icon and search box css */
+
+.header .navbar .search-form {
+    position: absolute;
+    top: 110%;
+    right: 17rem;
+    width: 0rem;
+    height: 4rem;
+    background-color: #000000e7;
+    border-radius: 2rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 5px 10px #000000c4;
+    z-index: 99;
+}
+
+.header .navbar .search-form input {
+    height: 100%;
+    width: 100%;
+    color: var(--text-white);
+    background: none;
+    text-transform: none;
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    font-family: var(--secondary-font);
+    padding: 0rem 1.5rem;
+}
+
+.header .navbar .search-form label {
+    font-size: 2rem;
+    padding-right: 1rem;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.header .navbar .search-form label:hover {
+    color: var(--secondary-color);
+}
+
+.header .navbar .search-form input::-webkit-search-cancel-button {
+    display: none;
+}
+
+
+.header .navbar .cart-box {
+    position: absolute;
+    max-width: 30%;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    top: 110%;
+    right: 9%;
+    background-color: var(--bg-white);
+    box-shadow: 0rem 0.4rem 1rem #000000;
+    scale: 0;
+}
+
+.header .navbar .cart-box .box {
+    max-height: 30rem;
+    overflow: auto;
+}
+
+.header .navbar .cart-box .cart-items {
+    border-bottom: 1px solid grey;
+}
+
+.header .navbar .cart-box .cart-items .fa-trash-can {
+    font-size: 2.2rem;
+    color: var(--dark-color);
+}
+
+.header .navbar .cart-box .cart-items .fa-trash-can:hover {
+    rotate: 20deg;
+    color: red;
+}
+
+.header .navbar .cart-box .cart-items img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+
+.header .navbar .cart-box .cart-items .content span {
+    font-size: 1.4rem;
+    color: var(--primeary-text);
+    font-family: var(--secondary-font);
+}
+
+.header .navbar .cart-box .Checkout-btn {
+    width: 100%;
+}
+
+.header .navbar .cart-box .Checkout-btn span {
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-family: var(--special-font);
+    color: var(--primeary-text);
+}
+
+.header .navbar .cart-box .Checkout-btn a {
+    height: 3rem;
+    border-radius: 1.5rem;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--text-white);
+}
+
+.header .navbar .cart-box .Checkout-btn a:hover {
+    color: var(--secondary-color);
+    background: var(--bg-white);
+}
+
+.header .navbar .cart-box .Checkout-btn .clr-crt-btn{
+    color: var(--primeary-text);
+    background: transparent; 
+    border: 1px solid #f83a36; 
+    width: 20%;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0;
+}
+.header .navbar .cart-box .Checkout-btn .clr-crt-btn:hover{
+    color: red;
+    border: 1px solid var(--dark-color);
+}
+/* navbar-toggle for small screen */
+.header .navbar-toggler {
+    color: var(--text-white);
+    font-size: 2rem;
+    height: 2.7rem;
+    padding: 0;
+}
+
+.header .navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* ================================================================================================================================================================= */
+
+/* Profile Section CSS for dropdown menu */
+.header .navbar #profile-btn img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.sub-menu-wrap {
+    position: absolute;
+    top: 100%;
+    right: 5%;
+    width: 32rem;
+    max-height: 0rem;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+
+.sub-menu {
+    background: var(--bg-white);
+    color: var(--secondary-color);
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0rem 0.4rem 1rem #000000
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info h3 {
+    font-weight: 500;
+    font-family: var(--secondary-font);
+    font-size: 2rem;
+    color: var(--dark-color);
+    text-transform: capitalize;
+}
+
+.user-info h3:hover {
+    font-weight: 700;
+}
+
+.user-info img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin-right: 1.5rem;
+}
+
+.sub-menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--dark-color);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.sub-menu-link {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+}
+
+.sub-menu-link p {
+    width: 100%;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-family: var(--secondary-font);
+    transition: 0.3s ease-in-out;
+}
+
+.sub-menu-wrap .sub-menu .sub-menu-link img {
+    width: 3rem;
+    background-color: var(--text-gray);
+    border-radius: 50%;
+    padding: 0.5rem;
+    margin-right: 1.5rem;
+}
+
+.sub-menu-link span {
+    font-size: 2.2rem;
+    transition: 0.3s ease-in-out;
+}
+
+.sub-menu-link:hover span {
+    transform: translateX(0.5rem);
+    color: var(--dark-color);
+}
+
+.sub-menu-link:hover p {
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+/* ================================================================================================================================================================= */
+
+/* 02 banner section css start */
+.banner_section {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    top: 0;
+    padding: 0;
+}
+
+.banner_section .carousel-inner .carousel-item video {
+    z-index: 000;
+    position: inherit;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+
+/* banner text */
+.banner_section .carousel-caption {
+    text-align: left;
+    top: 50%;
+    left: 50%;
+    bottom: 0;
+    right: 0;
+    transform: translate(-75%, -35%);
+    max-width: 1320px;
+}
+
+.banner_section .carousel-caption h2 {
+    margin: 0;
+    padding: 0;
+    text-shadow: 2px 7px 5px #00000093;
+}
+
+.banner_section .carousel-caption h1 {
+    text-shadow: 2px 7px 5px #000000ac;
+}
+
+/* ================================================================================================================================================================= */
+
+/* 03 Features Section CSS */
+.card {
+    padding: 2rem;
+    height: 30rem;
+    background-color: var(--light-color);
+    position: relative;
+    display: flex;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.5s ease-in-out;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(2rem);
+}
+
+.feature_section .features-box {
+    background: var(--light-color);
+    border: 0.15rem solid var(--light-color);
+    transition: 0.5s;
+}
+
+.feature_section .features-icon-border {
+    background: transparent;
+    border-radius: 50%;
+    border: 0.2rem solid var(--light-color);
+    padding: 1.3rem;
+    display: inline-block;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.feature_section .features-box .features-icon {
+    height: 7rem;
+    width: 7rem;
+    background-color: var(--light-color);
+    margin: auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature_section .features-box .features-icon img {
+    width: 5rem;
+}
+
+.feature_section .features-box h3 {
+    margin-top: 1.25rem;
+    color: var(--primeary-text);
+    transition: 0.5s all;
+}
+
+.feature_section .features-box p {
+    margin-top: 1.25rem;
+    color: var(--primeary-text);
+    font-family: var(--secondary-font);
+    font-size: 1.6rem;
+    font-weight: 500;
+    transition: 0.5s all;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+/* hover effects for card */
+.feature_section .features-box:hover {
+    background: linear-gradient(to bottom, rgb(185, 255, 243), #60cd12);
+    border-color: var(--secondary-color);
+}
+
+.feature_section .features-box:hover h3 {
+    color: var(--text-white);
+}
+
+.feature_section .features-box:hover .features-icon-border {
+    border-color: var(--dark-color);
+}
+
+.feature_section .features-box:hover p {
+    opacity: 1;
+}
+
+/* Features section css end */
+
+/* ================================================================================================================================================================= */
+
+/* About Landing Page CSS */
+.landing_about_section {
+    display: flex;
+    align-items: center;
+}
+
+.landing_about_section .container .row p {
+    color: var(--dark-color);
+    font-family: var(--secondary-font);
+    text-align: justify;
+    font-size: 1.6rem;
+}
+
+.landing_about_section .container .row h5 span {
+    color: var(--orange-color);
+    font-weight: 700;
+}
+
+.landing_about_section .container .row h3 {
+    color: var(--orange-color);
+    font-family: var(--secondary-font);
+    text-align: justify;
+}
+
+.landing_about_section .container .row .carousel {
+    border-radius: 1rem;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.744);
+}
+
+.landing_about_section .container .row .carousel-item img {
+    border-radius: 1rem;
+}
+
+/* About Landing Page CSS End */
+
+/* ================================================================================================================================================================= */
+
+/* Featured Product Landing Page */
+.featured-product-section {
+    background: rgb(255, 5, 5);
+    background: linear-gradient(135deg, rgba(255, 5, 5, 1) 51%, rgba(255, 197, 0, 1) 95%);
+}
+
+.featured-product-section .container .row .featured-txt-title {
+    font-family: var(--secondary-font);
+}
+
+.featured-product-section .container .row .featured-txt-title h1 {
+    font-family: var(--secondary-font);
+}
+
+.featured-product-section .container .row .featured-txt-title h1 span {
+    color: var(--orange-color);
+}
+
+.featured-product-section .container .row .featured-txt-subtitle {
+    color: #ecececd1;
+    font-family: var(--primary-font);
+    font-weight: 600;
+    font-size: 5rem;
+}
+
+.featured-product-section .container .row .featured-txt-para {
+    color: #ffffff;
+    font-family: var(--secondary-font);
+    font-weight: 400;
+    font-size: 1.6rem;
+    text-align: justify;
+}
+
+.featured-product-section .offer-price-circle {
+    width: 150px;
+    height: 150px;
+    top: 0rem;
+    left: 0rem;
+    display: flex;
+    background: var(--bg-white);
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 50%;
+    padding: 3.5rem;
+    rotate: 30deg;
+}
+
+.featured-product-section .offer-price-circle h1 {
+    font-size: 4.5rem;
+    color: #4d4b4b;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: var(--discount-font);
+}
+
+.featured-product-section .offer-price-circle h1 .offer-price-txt {
+    color: #ff0000;
+    font-weight: 900;
+}
+
+
+
+
+/* ================================================================================================================================================================= */
+
+/* Landing Product Padge CSS Start*/
+.fruite-item {
+    height: 100%;
+    max-height: 40rem;
+    width: 100%;
+    transition: 0.5s;
+    background-color: var(--light-color);
+    border-radius: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--orange-color);
+    box-shadow: 0px 5px 10px gray;
+}
+
+.fruite-item .discount-style{
+    color: var(--text-white);
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: var(--secondary-font);
+    top: 20px;
+    right: -42px;
+    rotate: 40deg;
+    background-color: var(--primeary-text);
+    position: absolute;
+    padding: 0.5rem 6rem;
+}
+
+
+.fruite-item .item-category-txt {
+    color: var(--primeary-text);
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: var(--secondary-font);
+    top: 10px;
+    left: 10px;
+    background-color: var(--orange-color);
+    position: absolute;
+    padding: 0.2rem 1.1rem;
+    border-radius: 0.7rem;
+
+}
+
+.fruite-item .product-details {
+    padding: 2rem;
+    border-radius: 0 0 1.5rem 1.5rem;
+}
+
+.fruite-item .product-details .price {
+    color: var(--primeary-text);
+    font-size: 1.6rem;
+    font-family: var(--discount-font);
+    font-weight: 700;
+}
+
+.fruite-item .product-details h4 {
+    color: var(--orange-color);
+    font-family: var(--secondary-font);
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 1.7rem;
+}
+
+.fruite-item .product-details .btn {
+    /* width: 100%; */
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+
+.tab-class .text-dark {
+    font-size: 1.5rem;
+    font-family: var(--secondary-font);
+    font-weight: 600;
+}
+
+.fruite .tab-class .nav-item a.active {
+    background-color: var(--secondary-color) !important;
+}
+
+.fruite .tab-class .nav-item a.active span {
+    color: var(--text-white) !important;
+}
+
+
+
+.fruite-item:hover {
+    box-shadow: 0 0 55px rgba(0, 0, 0, 0.57);
+}
+
+.fruite-item .fruite-img {
+    overflow: hidden;
+    transition: 0.5s;
+    border-radius: 10px 10px 0 0;
+}
+
+.fruite-item .fruite-img img {
+    height: 20rem;
+    width: 100%;
+    max-height: 17rem;
+    transition: 0.5s;    
+}
+
+.fruite-item .fruite-img img:hover {
+    transform: scale(1.3);
+}
+
+/* Landing Product Padge CSS End*/
+
+/* ================================================================================================================================================================= */
+
+/* Swiper js CSS Start */
+.swiper {
+    width: 100%;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Swiper js CSS end */
+
+/* ================================================================================================================================================================= */
+
+/* Customer testimonial section */
+
+.customer-review .swiper {
+    width: 80%;
+    padding: 5rem 0;
+}
+
+.customer-review .testimonial-slider {
+    width: 85%;
+    height: 75vh;
+    border-radius: 10px;
+    padding: 1rem 3rem;
+    background-color: var(--light-color);
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.545);
+}
+
+.customer-review .cust-container {
+    width: 100%;
+}
+
+.customer-review .testimonial-slider .profile-img img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+.customer-review .testimonial-slider .review .review-txt {
+    height: 200px;
+    padding: 10px 30px;
+}
+
+.customer-review .testimonial-slider .review p {
+    color: var(--primeary-text);
+}
+
+.customer-review .review .start-review {
+    width: 100%;
+}
+
+.customer-review .review .start-review i {
+    font-size: 2rem;
+    letter-spacing: 1rem;
+}
+
+/* ================================================================================================================================================================= */
+
+/* Footer  Section*/
+.footer {
+    border-radius: 2rem 2rem 0 0;
+    min-height: 80vh;
+    box-shadow: 0 -0.5rem 1.3rem 0 #0000009a;
+}
+
+.footer .brand-logo img {
+    width: 20rem;
+}
+
+.footer .social-icons i {
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.footer .social-icons .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.5rem;
+    border: 2px solid var(--text-gray);
+}
+
+.footer .social-icons .btn:hover {
+    background: var(--text-gray);
+}
+
+.footer .social-icons .btn:hover i {
+    color: var(--primeary-text);
+}
+
+.footer-item h4 {
+    font-family: var(--footer-font);
+    font-weight: 400;
+}
+
+.footer-item p {
+    font-family: var(--secondary-font);
+    text-align: justify;
+    font-size: 1.6rem;
+}
+
+.footer-item form input,
+textarea {
+    width: 100%;
+    padding: 0.4rem 1.5rem;
+    outline: none;
+    border: 1px solid var(--text-gray);
+    border-radius: 0.7rem;
+    background: transparent;
+    color: var(--text-white);
+    font-size: 1.5rem;
+    font-family: var(--secondary-font);
+    /* transition: 0.3s; */
+}
+
+.footer-item form input:focus,
+.footer-item form textarea:focus {
+    border: 1px solid var(--secondary-color);
+}
+
+.footer-item form input:active,
+textarea:active {
+    border: 1px solid var(--secondary-color);
+}
+
+.footer-item form input::placeholder,
+.footer-item form textarea::placeholder {
+    font-size: 1.3rem;
+    font-family: var(--secondary-font);
+    color: var(--text-gray);
+}
+
+.footer-item form button,
+.footer-item .main-btn {
+    font-size: 1.3rem;
+    background: transparent;
+    border: 1px solid orange;
+    color: var(--text-gray);
+    font-weight: 400;
+    font-family: var(--secondary-font);
+    transition: 0.5s;
+}
+
+.footer-item form button:hover,
+.footer-item .main-btn:hover {
+    color: var(--orange-color);
+    border: 1px solid var(--text-gray);
+    background: transparent;
+}
+
+.footer-item a {
+    color: var(--text-gray);
+    font-size: 1.5rem;
+    font-family: var(--secondary-font);
+    text-decoration: none;
+    line-height: 35px;
+}
+
+.footer-item a:hover {
+    color: var(--orange-color);
+    transform: translateY(-0.4rem);
+}
+
+/* ================================================================================================================================================================= */
+
+/* User-Profile-edit-page section css */
+
+.user-profile-edit, .privacy-policy-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: var(--secondary-font);
+}
+
+.user-profile-edit .container-main,
+.privacy-policy-content .container-main {
+    min-height: 80vh;
+    margin: 6rem 0;
+    box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.744);
+    border-radius: 1rem;
+}
+
+.user-profile-edit .btn-primary{
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.user-profile-edit .btn-primary:hover {
+    background-color: #03262c;
+}
+
+.user-profile-edit .btn-default,
+.privacy-policy-content .btn-default {
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-style: var(--secondary-font);
+    border: 2px solid var(--orange-color);
+    color: #3b3838;
+}
+
+.user-profile-edit .btn-default:hover,
+.privacy-policy-content .btn-default:hover {
+    border: 2px solid var(--secondary-color);
+    color: #000000;
+}
+
+.user-profile-edit .tab-content .tab-pane .media{
+    position: relative;
+}
+
+.user-profile-edit .media .media-body .fa-camera-retro{
+    font-size: 2rem;
+}
+
+.user-profile-edit .media .media-body label {
+    position: absolute;
+    top: 80%;
+    left: 26%;
+    background-color: rgb(184, 255, 164);
+    color: #000;
+}
+
+.user-profile-edit .form-group .dropdown button{
+    width: 100%;
+    background-color:var(--bg-white);
+    font-size: 1.5rem;
+    border: 1px solid var(--text-gray);
+}
+.user-profile-edit .form-group .dropdown-menu{
+    width: 100%;
+    font-size: 1.5rem;
+}
+.user-profile-edit .tab-content .tab-pane .card-body .form-group {
+    font-size: 1.6rem;
+}
+
+.user-profile-edit .tab-content .tab-pane .card-body .form-group input {
+    font-size: 1.6rem;
+    border-color: var(--text-gray);
+}
+
+.user-profile-edit .list-group .list-group-item,
+.privacy-policy-content .list-group .list-group-item {
+    font-size: 1.5rem;
+}
+
+
+
+.user-profile-edit .account-settings-fileinput {
+    position: absolute;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+/* profile section end */
+
+
+/* ========================================================================================================================================================= */
+
+/* Store Section Start */
+.store .fruite{
+    padding-top: 10rem;
+}
+
+.store .input-group input,
+.product-details .input-group input{
+    /* position: relative; */
+    background-color: var(--bg-white);
+    font-size: 1.6rem;
+    font-family: var(--secondary-font);
+}
+.store .input-group span,
+.product-details .input-group input{
+    height: 100%;
+    background: transparent;
+    z-index: 99;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    color: var(--text-white);
+    background-color: var(--secondary-color);
+    transition: 0.3s;
+}
+.store .input-group span:hover,
+.product-details .input-group input:hover{
+    color: var(--text-white);
+    background-color: var(--anchor-color);
+}
+
+.prd-sort{
+    background-color: var(--orange-color);
+    color: var(--primeary-text);
+    font-family: var(--secondary-font);
+    font-size: 1.5rem;
+    color: var(--text-white);
+    font-weight: 500;
+}
+.prd-sort select{
+    padding: 0.5rem 2rem ;
+    border-radius: 2rem;
+    font-family: var(--secondary-font);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+/* Store End */
+
+/* ========================================================================================================================================================= */
+
+/* Product Details Section Start */
+.product_details .prd-details-right h4{
+    font-weight: 700;
+    font-family: var(--secondary-font);
+    color: var(--primeary-text);
+    font-size: 3rem;
+}
+.product_details .prd-details-right h5{
+    font-weight: 700;
+    font-family: var(--discount-font);
+    color: var(--primeary-text);
+    font-size: 2.5rem;
+}
+.product_details .swiper-wrapper h5{
+    z-index: 9999;
+    font-weight: 700;
+    font-family: var(--discount-font);
+    color: var(--primeary-text);
+    font-size: 1.5rem;
+    background-color: var(--orange-color);
+}
+.product_details .prd-details-right .details{
+    height: 20rem;
+    font-family: var(--primary-font);
+    font-size: 1.4rem;
+    overflow: hidden;
+}
+.product_details .tab-content p{
+    text-align: justify;
+    color: #000000;
+}
+.product_details form{
+    font-family: var(--secondary-font);
+}
+.product_details form h4{
+    color: rgb(116, 113, 113);
+}
+.product_details form input{
+    font-size: 1.5rem;
+}
+.product_details form a{
+    text-transform: capitalize;
+    font-size: 1.2rem;
+    margin: 0;
+    padding: 0.5rem 1rem;
+}
+
+
+/* ========================================================================================================================================================= */
+.privacy-policy-content .tab-pane p{
+    font-size: 1.2rem;
+    text-align: justify;
+    color: #000;
+}
+.privacy-policy-content .tab-pane h6{
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: justify;
+    color: #f88484;
+    padding: 0.5rem 0;
+}
+.privacy-policy-content .tab-pane ul li{
+    list-style: circle;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: justify;
+    padding: 0.5rem 0;
+}
+.privacy-policy-content .tab-pane span{
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+
+/* ==================================================================================================================================================== */
+/* Sweet alert modification */
+/* CSS for custom toast title */
+
+.popup{
+    /* font-size: 1.6rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10rem;
+    border-radius: 2rem;
+    font-size: 1.6rem;
+}
+
+.popup-container{
+    margin-right: 3rem;
+    right: 2rem;
+}
+
+
+
+.swal2-popup .swal2-title,
+.swal2-popup .swal2-content {
+    font-size: 3rem;
+}
+
+.swal2-popup .swal2-html-container{
+    font-size: 2rem;
+}
+
+.swal2-popup .swal2-confirm,
+.swal2-popup .swal2-cancel {
+    font-size: 1.8rem;
+}
+
+.delete-btn {
+    font-size: 1rem;
+}
+
+/* -------------------------------------------------Product details swiper css----------------------------------------------------------------------- */
+.product_details .swiper-slide img{
+    height: 412px; 
+    width: 100%; 
+    object-fit: contain;
+    transition: 1s;
+}
+.product_details .swiper-slide img:hover{
+    transform: scale(1.5);
+}
+
+/* Order_History Page CSS */
+.orders table th{
+    font-family: var(--secondary-font);
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.orders table tbody tr td{
+    font-family: var(--secondary-font);
+    color: #343434;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    align-items: center;
+}
+
+
+/* invoice page css */
+
+.invoice p, h5{
+    color: #000;
+}
+
+.invoice-container{
+    margin-top: 8rem;
+    border-radius:2rem;
+    box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.634);
+}
+
+.invoice table thead tr th,
+.invoice table tbody tr td{
+    font-size: 1.6rem;
+    font-family: var(--secondary-font);
+}
+
+
+/* Stars CSS for rating------------------------------------- */
+.product_details .fa-star{
+    font-size: 1.6rem;
+}
+
+.product_details form .rating_star i{
+    font-size: 3rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+}
+
+.product_details form .rating_star input{
+    display: none;
+}
+
+.fa-star.checked {
+    color: var(--orange-color);
+}
+
+.fa-star.unchecked {
+    color: #ddd;
+}

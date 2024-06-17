@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutica -{% block title %}{% endblock title %}</title>
+
+
+
+    <!-- bootstrap-5 css link -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Swiper js cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
+    <!-- Favicon CDN link -->
+    <link rel="shortcut icon" href="{% static 'Media/favicon_io/android-chrome-512x512.png' %}" type="image/x-icon">
+
+    <!-- style CSS link -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+
+    <!-- responsive css style link -->
+    <link rel="stylesheet" href="{% static 'css/responsive-style.css' %}">
+
+    <!-- Sweet alert link for alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+</head>
+
+<body>
+    {% url 'index' as index %}
+    {% url 'about' as about %}
+    {% url 'store' as store %}
+    {% url 'contactUs' as contactUs %}
+    {% url 'signup' as signup %}
+    {% url 'login' as login %}
+
+
+    <!-- navbar section Start -->
+    <header id="full_nav">
+        <div class="header">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="brand-logo" href="/">
+                        <img src="{% static 'Media/images/logo.png' %}" class="img-fluid" alt="FtoC logo">
+                        <p id="logo-txt">Fruit Store</p>
+                    </a>
+                    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == index %}active{% endif %}" aria-current="page"
+                                    href="{% url 'index' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == about %}active{% endif %}"
+                                    href="{% url 'about' %}">about</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == store %}active{% endif %}"
+                                    href="{% url 'store' %}">Store</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'contact_us' %}">Contact us</a>
+                            </li>
+                            {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="wishlist.html">Wishlist</a>
+                            </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <!-- {% block login-nav %} -->
+                                {% if not request.user.is_authenticated %}
+                                <a class="nav-link {% if request.path == login %} active {% endif %}"
+                                    href="{% url 'login' %}">Login</a>
+                                {% endif %}
+                                <!-- {% endblock login-nav %} -->
+                            </li>
+                        </ul>
+                        <div class="nav-icons d-flex justify-content-center align-items-center">
+
+                            {% comment %} search button section {% endcomment %}
+                            <button class="btn d-flex m-0 justify-content-center align-items-center" id="search-btn"
+                                type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <form action="#" class="search-form" style="z-index: 99;">
+                                <input type="search" name="search-box" id="search-box" placeholder="Search here...">
+                                <label for="search-box" class="fa fa-search"></label>
+                            </form>
+
+                            {% comment %} cart button section {% endcomment %}
+                            {% if request.user.is_authenticated %}
+                            <a href="{% url 'cart_detail' %}" class="position-relative mx-5 my-auto" id="cart-btn">
+                                <i class="fa fa-shopping-bag fa-2x"></i>
+                                <span
+                                    class="cart-count position-absolute rounded-circle d-flex align-items-center justify-content-center px-1">
+                                    {{ cart_items.count }}
+                                </span>
+                            </a>
+                            <div class="cart-box">
+                                <div class="box">
+                                    {% for item in cart_items %}
+                                    <div class="cart-items d-flex align-items-center justify-content-between mb-3">
+                                        <a href="{% url 'product_detail' item.product.id %}">
+                                            <div class="content d-flex align-items-center">
+                                                {% if item.product.image %}
+                                                <img src="{{ item.product.image.url }}" alt="cart-image">
+                                                {% else %}
+                                                <img src="{% static 'Media/images/fruitica.png' %}" alt="cart-image"
+                                                    width="50" height="50">
+                                                {% endif %}
+                                                <div class="ms-4">
+                                                    <h5 class="py-3">{{ item.product.product_name }}</h5>
+                                                    <span class="price pe-3">Rs. {{ item.product.price }} / {{ item.unit_parameter }} </span>
+                                                    <span class="qty ps-3">Qty: {{ item.quantity }}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                                <div class="Checkout-btn">
+                                    {% if cart_items.count == 0 %}
+                                    <div class="d-flex align-items-center">
+                                        <span class="fs-8 fw-normal text text-primary-emphasis me-3">No items in Cart</span>
+                                        <img src="{% static 'media/images/shopping-cart.png' %}" alt="" width="40px">
+                                    </div>
+                                    {% else %}
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Total: Rs. {{ total_price }}/-</span>
+                                    </div>
+                                    <a href="{% url 'cart_detail' %}"
+                                        class="btn main-btn rounded-5 d-flex align-items-center justify-content-center m-0 mt-3">View Cart
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            
+                            <!-- profile button section -->
+                            <div class="my-auto" id="profile-btn">
+                                {% if user.profile_img %}
+                                <img class="img-fluid rounded-circle" src="{{ user.profile_img.url }}"
+                                    alt="Profile Image">
+                                {% else %}
+                                <img class="img-fluid rounded-circle" src="
+                                    " alt="Default Profile Image">
+                                {% endif %}
+                            </div>
+                            <div class="sub-menu-wrap">
+                                <div class="sub-menu">``
+                                    <div class="user-info">
+                                        <a href="{% url 'profileEdit' user.id %}">
+                                            {% if user.profile_img %}
+                                            <img class="img-fluid rounded-circle" src="{{ user.profile_img.url }}">
+                                            {% else %}
+                                            <img class="d-block rounded-circle" style="width: 120px;"
+                                                src="{% static 'media/images/default_profile_img' %}">
+                                            {% endif %}
+                                            <a href="{% url 'profileEdit' user.id %}">
+                                                <h3 style="text-transform: capitalize;">{{request.user.get_full_name}}
+                                                </h3>
+                                            </a>
+                                    </div>
+                                    <hr>
+                                    <a href="{% url 'profileEdit' user.id %}" class="sub-menu-link">
+                                        <img src="{% static 'Media/images/User-img/profile.png' %}" alt="edit profile">
+                                        <p>Edit Profile</p>
+                                        <span>></span>
+                                    </a>
+                                    <a href="{% url 'order_history' %}" class="sub-menu-link">
+                                        <img src="{% static 'Media/images/User-img/orders.png' %}" alt="Setting privacy">
+                                        <p>My Orders</p>
+                                        <span>></span>
+                                    </a>
+                                    <a href="{% url 'privacy_policy' %}" class="sub-menu-link">
+                                        <img src="{% static 'Media/images/User-img//help.png' %}" alt="help&support">
+                                        <p>Help & Support</p>
+                                        <span>></span>
+                                    </a>
+                                    {% if user.is_superuser %}
+                                    <a href="admin/" class="sub-menu-link">
+                                        <img src="{% static 'Media/images/User-img/admin.png' %}" alt="admin">
+                                        <p>Admin - Section</p>
+                                        <span>></span>
+                                    </a>
+                                    <a href="{% url 'manage_reviews' %}" class="sub-menu-link">
+                                        <img src="{% static 'Media/images/User-img/admin.png' %}" alt="admin">
+                                        <p>Manage User Reviews</p>
+                                        <span>></span>
+                                    </a>
+                                    {% endif %}
+                                    <a href="{% url 'logout' %}?next={{ request.path }}" class="sub-menu-link">
+                                        <img src="{% static 'Media/images/User-img/logout.png' %}" alt="logout">
+                                        <p>Logout</p>
+                                        <span>></span>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            {% comment %} end if user {% endcomment %}
+                        </div>
+                    </div>
+
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- navbar section end -->
+
+    {% block body %}
+
+    {% endblock body %}
+
+    <!-- Footer Section start -->
+    <footer>
+        <div class="container-fluid footer bg-dark text-white-50 pt-5  d-flex align-items-center">
+            <div class="container pb-5">
+                <div class="pb-4 mb-4" style="border-bottom: 1px solid #60cd1278 ;">
+                    <div class="row g-4">
+                        <div class="col-lg-9 d-flex align-items-center justify-content-center align-items-center">
+                            <a class="brand-logo p-0 m-0" href="/">
+                                <img src="{% static 'Media/images/logo.png' %}" class="img-fluid" alt="FtoC logo">
+                                <p id="logo-txt" style="font-size: 1.8rem;">Fruit Store</p>
+                            </a>
+                        </div>
+                        <div class="col-lg-3 ">
+                            <div class="social-icons d-flex justify-content-center align-items-center pt-5">
+                                <a class="btn mx-3 rounded-circle" href="https://wa.me/918975156788">
+                                    <i class="fa-brands fa-whatsapp fa-lg"></i>
+                                </a>
+                                <a class="btn mx-3 rounded-circle" href="https://www.facebook.com/">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="btn mx-3 rounded-circle" href="https://x.com/?lang=en">
+                                    <i class="fa-brands fa-x-twitter"></i></i>
+                                </a>
+                                <a class="btn mx-3 rounded-circle"
+                                    href="https://www.linkedin.com/in/suprit-upadhye-b666432b0/">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Why People Like us!</h4>
+                            <p class="mb-4">typesetting, remaining essentially unchanged. It was
+                                popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
+                            <a href="about.html" class="btn main-btn py-1 px-4">Read More</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 px-5">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Shop Info</h4>
+                            <a class="btn-link" href="{% url 'about' %}">About Us</a>
+                            <a class="btn-link" href="{% url 'contact_us' %}">Contact Us</a>
+                            <a class="btn-link" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                            <a class="btn-link" href="{% url 'privacy_policy' %}">Terms & Condition</a>
+                            <a class="btn-link" href="{% url 'privacy_policy' %}">Return Policy</a>
+                            <a class="btn-link" href="{% url 'privacy_policy' %}">FAQs & Help</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        {% if request.user.is_authenticated %}
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Account</h4>
+                            <a class="btn-link" href="{% url 'profileEdit' user.id %}">My Account</a>
+                            <a class="btn-link" href="{% url 'order_history' %}">Shop details</a>
+                            <a class="btn-link" href="{% url 'cart_detail' %}">Shopping Cart</a>
+                            <a class="btn-link" href="wishlist.html">Wishlist</a>
+                            <a class="btn-link" href="{% url 'order_history' %}">Order History</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Contact</h4>
+                            <p>Email: Example@gmail.com</p>
+                            <p>Phone: +91- 9876543210</p>
+                            <form action="https://api.web3forms.com/submit" method="POST">
+                                <input type="hidden" name="access_key" value="5e619de3-d724-477b-b7f2-4dbb55016177">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label"></label>
+                                    <input type="text" placeholder="Enter Your Name" id="name" name="Name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label"></label>
+                                    <input type="email" placeholder="Enter Your Email" id="email" name="Email">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label"></label>
+                                    <textarea name="message" id="message" rows="3"
+                                        placeholder="Enter your Message Here"></textarea>
+                                </div>
+                                <div class="button d-flex justify-content-center align-items-center">
+                                    <button type="submit" class="main-btn py-1 px-3">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer section end-->
+
+
+
+    <!-- ===================================================================================================================================================== -->
+
+    {% comment %} Script for alerts {% endcomment %}
+
+    <script>
+        let profile_image = document.getElementById("profile_image");
+        let img_input = document.getElementById("input_profile_img");
+
+        inputFile.onchange = function () {
+            profile_image.src = URL.createObjectURL(img_input.files[0]);
+        }
+    </script>
+
+    <!-- Script Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Swiper js script cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+    <!-- main.js Script linking -->
+    <script src="{% static 'Javascript/main.js' %}"></script>
+
+
+    {% comment %} Profile Js {% endcomment %}
+    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <!-- script -->
+    
+{% block sweet-alert %}
+    <script>
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            },
+            customClass: {
+                title: 'popup-title',
+                container: 'popup-container',
+                popup: 'popup',
+            }
+        });
+        Toast.fire({
+            icon: "success",
+            title: "{{message}}",
+        });
+        {% endif %}
+        {% endfor %}
+    </script>
+{% endblock sweet-alert %}

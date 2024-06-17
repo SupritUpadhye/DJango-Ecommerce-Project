@@ -1,0 +1,383 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Product Details{% endblock title %}
+
+<style>
+
+</style>
+
+
+{% block body %}
+<section class="product_details">
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row g-4 mt-5">
+                <div class="col-lg-8 col-xl-9">
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="border rounded">
+                                <div style="--swiper-navigation-color: #ffcd44; --swiper-pagination-color: #ffff; font-size: 1.5rem; color: #ffff;"
+                                    class="swiper mySwiper5 position-relative rounded-4">
+                                    <div class="swiper-wrapper">
+                                        <h5 class="position-absolute p-3 px-5 w-100 text-center">Flat {{
+                                            product.get_percentage }}% Discount</h5>
+                                        {% for images in product_images %}
+                                        <div class="swiper-slide prd-img-slide">
+                                            <img src="{{ images.images.url }}" />
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="swiper-pagination text-dark"></div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 p-3 prd-details-right">
+                            <h4 class="mb-3">{{ product.product_name }}</h4>
+                            <p class="mb-3 text-dark">Category: {{ product.category }}</p>
+                            <div class="d-block">
+                                <h5 class="mb-3">Rs. {{ product.price }} / {{details.unit_parameter }}</h5>
+                                <h5 class="mb-3 text-decoration-line-through" style="color: gray; font-size: 1.2rem;">
+                                    Rs. {{ product.max_retail_price }}</h5>
+                            </div>
+                            <p class="text-dark mt-2">Product Details :</p>
+                            <div class="d-flex details pb-3">
+                                <p class="mb-3 text-dark text-justify me-3">{{ product.description }}
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="" class="btn main-btn rounded-pill add-to-cart-btn px-4 py-1"
+                                    data-product-id="{{ product.id }}"><i class="fa fa-shopping-bag me-2"></i> Add to
+                                    cart</a>
+                                <a href="{% url 'buy_now' product.id %}"
+                                    class="show-more-details-btn btn main-btn w-50">
+                                    <i class="fa-solid fa-cart-arrow-down"></i> Buy Now</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <nav>
+                                <div class="nav  nav-tabs mb-3"
+                                    style="font-size: 1.3rem; font-family: var(--secondary-font); font-weight: 600;">
+                                    <button class="nav-link active border-bottom-0" type="button" role="tab"
+                                        id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                                        aria-controls="nav-about" aria-selected="true">Description</button>
+                                    <button class="nav-link border-bottom-0" type="button" role="tab"
+                                        id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+                                        aria-controls="nav-mission" aria-selected="false">Reviews</button>
+                                </div>
+                            </nav>
+                            <div class="tab-content mb-5">
+                                <div class="tab-pane active" id="nav-about" role="tabpanel"
+                                    aria-labelledby="nav-about-tab">
+                                    <p class="pe-5">{{ details.Detailed_description }}</p>
+                                    <div class="px-2">
+                                        <div class="row g-4">
+                                            <div class="col-12">
+                                                <table class="table">
+                                                    <tr
+                                                        class="row bg-light align-items-center text-center justify-content-center py-2">
+                                                        <td class="col-6">
+                                                            <p class="mb-0">Weight</p>
+                                                        </td>
+                                                        <td class="col-6">
+                                                            <p class="mb-0">{{details.weight }}
+                                                                {{details.unit_parameter}}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr
+                                                        class="row text-center align-items-center justify-content-center py-2">
+                                                        <td class="col-6">
+                                                            <p class="mb-0">Country of Origin</p>
+                                                        </td>
+                                                        <td class="col-6">
+                                                            <p class="mb-0">{{ details.country_of_origin }}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr
+                                                        class="row bg-light text-center align-items-center justify-content-center py-2">
+                                                        <td class="col-6">
+                                                            <p class="mb-0">Quality</p>
+                                                        </td>
+                                                        <td class="col-6">
+                                                            <p class="mb-0">{{ details.quality }}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr
+                                                        class="row text-center align-items-center justify-content-center py-2">
+                                                        <td class="col-6">
+                                                            <p class="mb-0">Vendor</p>
+                                                        </td>
+                                                        <td class="col-6">
+                                                            <p class="mb-0">{{ details.vendor }}</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr
+                                                        class="row bg-light text-center align-items-center justify-content-center py-2">
+                                                        <td class="col-6">
+                                                            <p class="mb-0">Expiry Date</p>
+                                                        </td>
+                                                        <td class="col-6">
+                                                            <p class="mb-0">{{ details.Date_of_Expiry }}</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="nav-mission" role="tabpanel"
+                                    aria-labelledby="nav-mission-tab">
+
+                                    <!-- user reviews -->
+                                    {% for review in product.productreview_set.all %}
+                                    <div class="d-flex pe-5">
+                                        {% if review.user.profile_img %}
+                                        <img src="{{ review.user.profile_img.url }}"
+                                            class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;"
+                                            alt="">
+                                        {% endif %}
+                                        <div class="">
+                                            <p class="mb-2" style="font-size: 14px;">{{ review.date }}</p>
+                                            <div class="d-flex justify-content-between">
+                                                <h5>{{ review.user.get_full_name }}</h5>
+                                                <div class="d-flex mb-3">
+                                                    <i class="fa fa-star {% if review and review.rating >= 1 %} checked {% else %} unchecked {% endif %}"></i>
+                                                    <i class="fa fa-star {% if review and review.rating >= 2 %} checked {% else %} unchecked {% endif %}"></i>
+                                                    <i class="fa fa-star {% if review and review.rating >= 3 %} checked {% else %} unchecked {% endif %}"></i>
+                                                    <i class="fa fa-star {% if review and review.rating >= 4 %} checked {% else %} unchecked {% endif %}"></i>
+                                                    <i class="fa fa-star {% if review and review.rating >= 5 %} checked {% else %} unchecked {% endif %}"></i>
+                                                </div>
+                                            </div>
+                                            <p>{{ review.review }}</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <form action="{% url 'submit_review' product.id %}" method="POST">
+                            {% csrf_token %}
+                            <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="border-bottom rounded">
+                                        <input type="text" class="form-control border-0 me-4" name="name"
+                                            value="{{ request.user.get_full_name }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="border-bottom rounded">
+                                        <input type="email" class="form-control border-0" name="email"
+                                            value="{{ request.user.email }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="border-bottom rounded my-4">
+                                        {% if request.user.is_authenticated %}
+                                        <textarea name="review" class="form-control border-1" cols="30" rows="8"
+                                            placeholder="Your Review *" spellcheck="false"
+                                            style="font-size: 1.5rem;"> {% if existing_review %} {{ existing_review.review }} {% endif %}
+                                        </textarea>
+                                        {% else %}
+                                        <h4>Please Login to Post Review</h4>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-between align-items-center py-3 mb-5">
+                                        <div class="d-flex align-items-center">
+                                            <p class="mb-0 me-3 text-dark">Please rate:</p>
+                                            <div class="d-flex align-items-center rating_star" style="font-size: 12px;">
+                                                <input type="radio" name="rating" id="rating-1" value="1" {% if existing_review and existing_review.rating == 1 %}checked{% endif %}>
+                                                <label for="rating-1"><i class="fa fa-star {% if existing_review and existing_review.rating >= 1 %}checked{% else %}unchecked{% endif %}"></i></label>
+
+                                                <input type="radio" name="rating" id="rating-2" value="2" {% if existing_review and existing_review.rating == 2 %}checked{% endif %}>
+                                                <label for="rating-2"><i class="fa fa-star {% if existing_review and existing_review.rating >= 2 %}checked{% else %}unchecked{% endif %}"></i></label>
+
+                                                <input type="radio" name="rating" id="rating-3" value="3" {% if existing_review and existing_review.rating == 3 %}checked{% endif %}>
+                                                <label for="rating-3"><i class="fa fa-star {% if existing_review and existing_review.rating >= 3 %}checked{% else %}unchecked{% endif %}"></i></label>
+
+                                                <input type="radio" name="rating" id="rating-4" value="4" {% if existing_review and existing_review.rating == 4 %}checked{% endif %}>
+                                                <label for="rating-4"><i class="fa fa-star {% if existing_review and existing_review.rating >= 4 %}checked{% else %}unchecked{% endif %}"></i></label>
+
+                                                <input type="radio" name="rating" id="rating-5" value="5" {% if existing_review and existing_review.rating == 5 %}checked{% endif %}>
+                                                <label for="rating-5"><i class="fa fa-star {% if existing_review and existing_review.rating >= 5 %}checked{% else %}unchecked{% endif %}"></i></label>
+                                            </div>
+                                        </div>
+                                        {% if request.user.is_authenticated and not existing_review %}
+                                        <button type="submit" class="btn main-btn">
+                                            Post Review
+                                        </button>
+                                        {% elif request.user.is_authenticated and existing_review %}
+                                        <button type="submit" class="btn main-btn">
+                                            Update Review
+                                        </button>
+                                        {% else %}
+                                        <button type="submit" class="btn main-btn">
+                                            Login
+                                        </button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3">
+                    <div class="row g-4 fruite">
+                        <div class="col-lg-12">
+                        </div>
+                        <!-- featured product advertising section -->
+                        <div class="col-lg-12 border rounded-4 px-4">
+                            <h4 class="my-4 text-secondary">Featured products</h4>
+                            {% for product in fproducts %}
+                            {% if product.featured == True %}
+                            <a href="{% url 'product_detail' product.id %}">
+                                <div class="row g-5 border-bottom d-flex align-items-center">
+                                    <div class="col-5 py-3">
+                                        <div class=" d-flex align-items-center" style="width: 100px; height: 100px;">
+                                            <img src="{{product.image.url}}" class="img-fluid rounded-4" alt="Image">
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div>
+                                            <h5 class="mb-2">{{product.product_name}}</h5>
+                                            <div class="d-flex mb-2">
+                                                <i class="fa fa-star text-secondary"></i>
+                                                <i class="fa fa-star text-secondary"></i>
+                                                <i class="fa fa-star text-secondary"></i>
+                                                <i class="fa fa-star text-secondary"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="fw-bold me-2">Rs.{{product.price}}</h5>
+                                                <h5 class="text-danger text-decoration-line-through"
+                                                    style="font-size: 1.3rem;">Rs.{{product.max_retail_price}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container py-5">
+                <div class="row g-4">
+                    <div class="col-12 text-start">
+                        {% if related_products %}
+                        <h3 style="color: orange;">
+                            Related products with free delivery on eligible orders</h3>
+                        {% endif %}
+                    </div>
+                    <div class="col-8 text-center">
+                    </div>
+                </div>
+                <!-- best selling product section -->
+                <div class="swiper mySwiper" style="margin-top:-3.5rem;">
+                    <div class="swiper-wrapper">
+                        {% for related_product in related_products %}
+                        <div class="swiper-slide">
+                            <a href="{% url 'product_detail' related_product.id %}">
+                                <div class="fruite-item" style="margin: 5rem 0rem;">
+                                    <div class="fruite-img ">
+                                        {% if product.image and product.image.url %}
+                                        <img class="img-fluid" src="{{ related_product.image.url }}" alt="">
+                                        {% else %}
+                                        <img src="" alt="">
+                                        {% endif %}
+                                    </div>
+                                    <div class="item-category-txt" style="text-transform: capitalize;">
+                                        {{related_product.category}}</div>
+                                    <div class="product-details">
+                                        <h4>{{ related_product.product_name }}</h4>
+                                        <p class="text-info-emphasis fw-bold text-center">{{ product.productQuantity }}
+                                            {{product.details.unit_parameter}}</p>
+                                        <div class="flex-lg-wrap">
+                                            <div class="d-block justify-content-between align-items-center">
+                                                <p class="price text-center" style="font-weight: 900;">
+                                                    Rs.{{related_product.price }} / {{
+                                                    related_product.details.unit_parameter}}</p>
+                                                <p class="price text-decoration-line-through text-center"
+                                                    style="font-size: 1rem;">Rs.
+                                                    {{related_product.max_retail_price}} /
+                                                    {{related_product.details.unit_parameter}}</p>
+                                            </div>
+                                            <div class="btns d-flex align-items-center justify-content-between">
+                                                <a href="#" class="show-more-details-btn btn main-btn px-5 py-2">buy
+                                                    now</a>
+                                                <a href="#" class="btn main-btn px-4 " style="font-size: 1.6rem;"><i
+                                                        class="fa-solid fa-cart-plus"></i></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    //Script for handling star rating_star
+    document.addEventListener('DOMContentLoaded', function () {
+        const stars = document.querySelectorAll('.rating_star input[type="radio"]');
+        const starIcons = document.querySelectorAll('.rating_star label i');
+
+        stars.forEach((star, index) => {
+            star.addEventListener('click', function () {
+                resetStars();
+                markStars(index);
+            });
+        });
+
+        function resetStars() {
+            starIcons.forEach(icon => {
+                icon.classList.remove('checked');
+                icon.classList.add('unchecked');
+            });
+        }
+
+        function markStars(index) {
+            for (let i = 0; i <= index; i++) {
+                starIcons[i].classList.remove('unchecked');
+                starIcons[i].classList.add('checked');
+            }
+        }
+
+        const existingRating = document.querySelector('.rating_star input[name="rating"]:checked');
+        if (existingRating) {
+            markStars(parseInt(existingRating.value) - 1);
+        }
+    });
+
+</script>
+
+
+{% block sweet-alert %}
+<script>
+    {% for message in messages %}
+    Swal.fire({
+        title: "Thank you for your valuable review! 🌟",
+        text: "{{ message }}",
+        imageUrl: "{% static 'media/images/User-img/thanks-img.jpg' %}",
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image"
+    });
+    {% endfor %}
+</script>
+{% endblock sweet-alert %}
+    
+
+
+{% endblock body %}

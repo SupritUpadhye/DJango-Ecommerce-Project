@@ -1,0 +1,37 @@
+<a href="{% url 'product_detail' product.id %}">
+    <div class="fruite-item" style="margin: 2rem 0rem;">
+        <div class="fruite-img">
+            {% if product.image and product.image.url %}
+            <img src="{{ product.image.url }}" alt="">
+            {% else %}
+            <img src="" alt="">
+            {% endif %}
+        </div>
+        <div class="item-category-txt" style="text-transform: capitalize;">{{product.category}}</div>
+
+        {% if product.get_percentage != 0 %}
+        <div class="discount-style" style="text-transform: uppercase;">Flat {{ product.get_percentage }}% OFF</div>
+        {% endif %}
+        <div class="product-details">
+            <h4 class="text-center">{{ product.product_name }}</h4>
+                <p class="text-info-emphasis fw-bold text-center">{{ product.productQuantity }} {{product.details.unit_parameter}}</p>
+            <div class="flex-lg-wrap">
+                    <div class="d-block justify-content-between align-items-center" style="height: 6rem;">
+                        <p class="price text-center" style="font-weight: 900;">Rs. {{ product.price }} / {{ product.details.unit_parameter }} </p>
+                        
+                        {% if product.price != product.max_retail_price %}
+                        <p class="price text-decoration-line-through text-center" style="font-size: 1rem;">Rs.
+                            {{product.max_retail_price}} / {{ product.details.unit_parameter }}</p>
+                        {% endif %}
+                    </div>
+                <div class="btns d-flex align-items-center justify-content-between">
+                    <a href="{% url 'buy_now' product.id %}" class="show-more-details-btn btn main-btn px-5 py-2">buy now</a>
+                    
+                    <a href="#" class="btn main-btn px-4 add-to-cart-btn" data-product-id="{{ product.id }}" style="font-size: 1.6rem;">
+                        <i class="fa-solid fa-cart-plus"></i>
+                    </a>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</a>

@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{request.user.get_full_name}} Profile{% endblock title %}
+
+{% block body %}
+<section class="user-profile-edit p-5 mt-4">
+    <div class="container container-main light-style flex-grow-1 container-p-y p-4">
+        <h4 class="font-weight-bold py-3 mb-4">
+            Account settings
+        </h4>
+        <div class="container-fluid overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list"
+                            href="#account-general">General</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-info">Address Info</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-change-password">Change password</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-connections">Connections</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <form method="POST" action="{% url 'profileEdit' user.id %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-body media d-flex align-items-center justify-content-evenly">
+                                    {% if user.profile_img %}
+                                    <img class="img-fluid rounded-circle" style="width: 120px; height: 120px;"
+                                        src="{{ user.profile_img.url }}">
+                                    {% else %}
+                                    <img class="d-block rounded-circle" style="width: 120px; height: 120px;"
+                                        src="{% static 'media/images/default_profile_img' %}">
+                                    {% endif %}
+                                    <div class="media-body mt-4">
+                                        <h2 class="text-center pt-4">{{request.user.get_full_name}}</h2>
+
+                                        <label class="btn btn-outline-primary rounded-circle">
+                                            <i class="fa-solid fa-camera-retro" id="profile_image"></i>
+                                            <input type="file" name="profile_img" class="account-settings-fileinput"
+                                                id="input_profile_img">
+                                        </label> &nbsp;
+                                    </div>
+                                </div>
+                                <hr class="border-light m-0">
+                                <div class="card-body mt-4">
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control rounded-2" value="{{user.first_name}}"
+                                            placeholder="Enter Your First Name" name="first_name">
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control rounded-2" value="{{user.last_name}}"
+                                            placeholder="Enter Your Last Name" name="last_name">
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">E-mail</label>
+                                        <input type="text" class="form-control rounded-2 mb-1" value="{{user.email}}"
+                                            placeholder="Enter Your email" name="email">
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">Mobile No</label>
+                                        <input type="tel" class="form-control rounded-2 mb-1" value="{{user.mobNo}}"
+                                            name="mobNo">
+                                    </div>
+                                </div>
+                                <div class="text-end mt-3 me-5">
+                                    <button type="submit" class="btn btn-primary m-5" id="edit-profile-btn">Save
+                                        Changes</button>
+                                    <a href="{% url 'skip_address' %}" type="button"
+                                        class="btn btn-default m-5">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- store/profile.html -->
+                        <div class="tab-pane fade" id="account-info">
+                            <form method="POST" action="{% url 'profileEdit' user.id %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-body pb-2">
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">Address Type</label>
+                                        <select class="custom-select w-100" style="font-size: 1.6rem;" name="address_type">
+                                            <option value="home" {% if address.address_type == 'home' %}selected{% endif %}> Home</option>
+                                            <option value="office" {% if address.address_type == 'office' %}selected{% endif %}>Office</option>
+                                            <option value="guardian" {% if address.address_type == 'guardian' %}selected{% endif %}>Guardian</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">Street 1</label>
+                                        <input type="text" class="form-control rounded-2"
+                                            placeholder="Flat no/ Building no, Building Name/ Company Name"
+                                            name="street1" value="{{ address.street1 }}">
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">Street 2</label>
+                                        <input type="text" class="form-control rounded-2"
+                                            placeholder="Street Address, Locality" name="street2"
+                                            value="{{ address.street2 }}">
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">City</label>
+                                        <select class="form-control" name="city" style="font-size: 1.5rem;">
+                                            <option value="" disabled>Select City</option>
+                                            <option value="Pune" {% if address.city == 'Pune' %}selected{% endif %}>Pune </option>
+                                            <option value="Mumbai" {% if address.city == 'Mumbai' %}selected{% endif %}> Mumbai</option>
+                                            <option value="Bangalore" {% if address.city == 'Bangalore' %}selected{% endif %}>Bangalore</option>
+                                            <option value="Visakhapatnam" {% if address.city == 'Visakhapatnam' %}selected{% endif %}>Visakhapatnam</option>
+                                            <option value="Pimpri-Chinchwad" {% if address.city == 'Pimpri-Chinchwad' %}selected{% endif %}>Pimpri-Chinchwad</option>
+                                            <option value="Patna" {% if address.city == 'Patna' %}selected{% endif %}>Patna </option>
+                                            <option value="Faridabad" {% if address.city == 'Faridabad' %}selected{% endif %}>Faridabad</option>
+                                            <option value="Meerut" {% if address.city == 'Meerut' %}selected{% endif %}> Meerut</option>
+                                            <option value="Rajkot" {% if address.city == 'Rajkot' %}selected{% endif %}> Rajkot</option>
+                                            <option value="Kalyan-Dombivali" {% if address.city == 'Kalyan-Dombivali' %}selected{% endif %}>Kalyan-Dombivali</option>
+                                            <option value="Vasai-Virar" {% if address.city == 'Vasai-Virar' %}selected{% endif %}>Vasai-Virar</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">Pincode</label>
+                                        <input type="number" class="form-control rounded-2" placeholder="Pincode" name="pincode" value="{{ address.pincode }}">
+                                    </div>
+                                </div>
+                                <hr class="border-light m-0">
+                                <div class="card-body pb-2">
+                                    <h6 class="mb-4">Contacts</h6>
+                                    <div class="form-group mt-5">
+                                        <label class="form-label">Mobile No</label>
+                                        <input type="text" class="form-control rounded-2" name="mobNo"
+                                            value="{{ user.mobNo }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="text-end mt-3 me-5">
+                                    <button type="submit" class="btn btn-primary m-5" id="address-edit-btn">Save
+                                        changes</button>
+                                    <a href="{% url 'index' %}" type="button" class="btn btn-default m-5">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="account-change-password">
+                            <form method="post" action="{% url 'profileEdit' user.id %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-body pb-2">
+                                    <div class="form-group">
+                                        <label for="old_password">Current password</label>
+                                        <input type="password" class="form-control" id="old_password"
+                                            name="old_password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new_password">New password</label>
+                                        <input type="password" class="form-control" id="new_password"
+                                            name="new_password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirm_password">Confirm new password</label>
+                                        <input type="password" class="form-control" id="confirm_password"
+                                            name="confirm_password">
+                                    </div>
+                                </div>
+                                <div class="text-end mt-3 me-5">
+                                    <button type="submit" class="btn btn-primary m-5" id="pass-change-btn">Save
+                                        changes</button>&nbsp;
+                                    <a href="{% url 'skip_address' %}" type="button"
+                                        class="btn btn-default m-5">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="account-connections">
+                            <div class="card-body d-flex justify-content-center align-items-center mb-5">
+                                <h5 class="m-4">
+                                    You are connected with Fruitica Website /
+                                </h5>
+                                <img src="{% static 'media/images/feature-icon/google-icon.png'%}" alt="google-icon"
+                                    style="width: 2rem;">
+                                <span style="font-size: 2rem; font-weight: 700;">oogle</span>
+                            </div>
+                            <form id="delete-account-form" action="#" method="POST">
+                                {% csrf_token %}
+                                <div class="text-end mt-5 me-5">
+                                    <button type="submit" class="btn btn-primary m-5" id="delete-account-btn">Delete
+                                        Account</button>&nbsp;
+                                    <a href="{% url 'skip_address' %}" type="button"
+                                        class="btn btn-default m-5">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    <!-- sweet alert for Delete Account -->
+
+    document.getElementById('delete-account-btn').addEventListener('click', function () {
+        event.preventDefault();
+        Swal.fire({
+            title: "Are you sure to Delete Your Account?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("{% url 'delete_account' %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your account has been deleted.",
+                            icon: "success"
+                        }).then(() => {
+                            window.location.href = "{% url 'index' %}";
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Failed to delete your account. Please try again later.",
+                            icon: "error"
+                        });
+                    }
+                })
+            }
+        });
+    });
+</script>
+
+
+{% for message in messages %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        {% if message.tags == 'error' %}
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "{{ message }}",
+        });
+        {% elif message.tags == 'success' %}
+        Swal.fire({
+            icon: "success",
+            title: "{{ message }}",
+            showConfirmButton: false,
+            timer: 3000
+        });
+        {% endif %}
+    });
+</script>
+{% endfor %}
+{% endblock body %}
